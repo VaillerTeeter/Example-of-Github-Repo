@@ -1,5 +1,8 @@
 name: Lint
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches:
@@ -39,3 +42,4 @@ jobs:
                 max: 200
               truthy:
                 allowed-values: ["true", "false"]
+                check-keys: false
