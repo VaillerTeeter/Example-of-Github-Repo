@@ -1,0 +1,48 @@
+<!-- 请根据你的 PR 类型删除不相关的部分 -->
+<!-- Please remove sections that are not relevant to your PR type -->
+
+## 变更类型 / Change Type
+
+- [ ] Bug 修复 / Bug Fix
+- [ ] 新功能 / New Feature
+- [ ] 重构 / Refactor
+- [ ] 文档更新 / Documentation Update
+- [ ] 其他 / Other: ___
+
+## 变更描述 / Description
+
+<!-- 简要描述本次 PR 的目的和改动 -->
+<!-- Briefly describe the purpose and changes of this PR -->
+
+## 关联 Issue / Related Issues
+
+<!-- 关联的 Issue，如：Closes #123 / Fixes #456 -->
+<!-- Link related issues, e.g. Closes #123 / Fixes #456 -->
+
+## 改动内容 / Changes Made
+
+- 
+- 
+- 
+
+## 测试说明 / Testing
+
+<!-- 描述你如何测试了这些改动 -->
+<!-- Describe how you tested these changes -->
+
+- [ ] 已在本地测试 / Tested locally
+- [ ] 已添加/更新单元测试 / Added or updated unit tests
+- [ ] 已在以下环境验证 / Verified in the following environments:
+  - 
+
+## 截图 / Screenshots
+
+<!-- 如有 UI 变化，请附上前后对比截图 -->
+<!-- If there are UI changes, please attach before/after screenshots -->
+
+## Checklist
+
+- [ ] 代码遵循项目规范 / Code follows project guidelines
+- [ ] 已自我 Review / Self-reviewed
+- [ ] 无多余的调试代码 / No debug code left
+- [ ] 已更新相关文档（如需要）/ Documentation updated (if needed)
