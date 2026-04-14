@@ -21,9 +21,9 @@
 
 ## 改动内容 / Changes Made
 
-- 
-- 
-- 
+- 描述改动 1 / Change 1
+- 描述改动 2 / Change 2
+- 描述改动 3 / Change 3
 
 ## 测试说明 / Testing
 
@@ -33,7 +33,7 @@
 - [ ] 已在本地测试 / Tested locally
 - [ ] 已添加/更新单元测试 / Added or updated unit tests
 - [ ] 已在以下环境验证 / Verified in the following environments:
-  - 
+  - 描述环境 / Specify environment
 
 ## 截图 / Screenshots
 

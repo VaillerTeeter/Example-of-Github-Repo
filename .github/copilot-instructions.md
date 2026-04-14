@@ -5,11 +5,13 @@
 **所有 `gh` 指令的认证 Token 统一从项目根目录的 `.env` 文件中读取。**
 
 `.env` 文件格式（该文件已加入 `.gitignore`，不会提交到仓库）：
-```
+
+```ini
 GH_TOKEN=your_github_personal_access_token_here
 ```
 
 在执行任何 `gh` 指令前，需确保环境变量已加载：
+
 ```powershell
 # Windows PowerShell — 每次新开终端时执行一次
 $content = Get-Content .env; foreach ($line in $content) { if ($line -match "^GH_TOKEN=(.+)$") { $env:GH_TOKEN = $Matches[1] } }
@@ -29,6 +31,7 @@ gh auth status
 ### 常用 gh 指令速查
 
 #### 仓库管理
+
 ```powershell
 # 查看仓库信息
 gh repo view
@@ -41,6 +44,7 @@ gh repo edit --visibility public   # 或 private
 ```
 
 #### 分支操作
+
 ```powershell
 # 列出所有分支
 gh api repos/{owner}/{repo}/branches
@@ -51,6 +55,7 @@ gh api repos/{owner}/{repo}/branches/{branch}/protection \
 ```
 
 #### Issue 管理
+
 ```powershell
 gh issue list
 gh issue create --title "标题" --body "内容"
@@ -58,6 +63,7 @@ gh issue close <number>
 ```
 
 #### Pull Request
+
 ```powershell
 gh pr list
 gh pr create --title "标题" --body "内容" --base master
@@ -65,12 +71,14 @@ gh pr merge <number> --squash
 ```
 
 #### 发布版本
+
 ```powershell
 gh release create v1.0.0 --title "Release v1.0.0" --notes "变更说明"
 gh release list
 ```
 
 #### 工作流 / Actions
+
 ```powershell
 gh workflow list
 gh run list
