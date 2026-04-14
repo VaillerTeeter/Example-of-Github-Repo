@@ -4,7 +4,7 @@
 
 ## 目录结构
 
-```
+```text
 .
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
@@ -31,22 +31,27 @@
 ## 本地配置
 
 1. 复制 Token 模板文件：
+
    ```powershell
    Copy-Item .env.example .env
    ```
 
 2. 编辑 `.env`，填入你的 GitHub Personal Access Token：
-   ```
+
+   ```ini
    GH_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
    ```
+
    > Token 申请地址：GitHub → Settings → Developer settings → Personal access tokens
 
 3. 加载环境变量（每次新开终端执行一次）：
+
    ```powershell
    $content = Get-Content .env; foreach ($line in $content) { if ($line -match "^GH_TOKEN=(.+)$") { $env:GH_TOKEN = $Matches[1] } }
    ```
 
 4. 验证配置：
+
    ```powershell
    gh auth status
    ```
