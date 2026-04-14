@@ -20,13 +20,6 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v17
         with:
           globs: "**/*.md"
-          config: |
-            {
-              "default": true,
-              "MD013": false,
-              "MD033": false,
-              "MD041": false
-            }
 
   yaml-lint:
     name: YAML Lint

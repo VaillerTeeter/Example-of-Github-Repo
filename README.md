@@ -20,6 +20,7 @@
 │   └── copilot-instructions.md       # Copilot 工作区指令
 ├── .env.example                      # GitHub Token 配置模板
 ├── .gitignore
+├── .markdownlint.json                # Markdown lint 规则配置
 ├── CODE_OF_CONDUCT.md                # 行为准则
 ├── CONTRIBUTING.md                   # 贡献指南
 ├── LICENSE                           # GNU GPLv3
