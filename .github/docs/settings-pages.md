@@ -8,7 +8,7 @@
 
 GitHub Pages 是 GitHub 提供的静态网站托管服务，可将仓库中的 HTML/CSS/JS 文件或经过构建工具生成的静态站点发布到公网，域名格式为：
 
-```
+```text
 https://{username}.github.io/{repo}/
 ```
 

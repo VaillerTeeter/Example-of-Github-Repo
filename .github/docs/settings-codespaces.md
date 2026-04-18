@@ -8,7 +8,7 @@
 
 GitHub Codespaces 是基于云的开发环境：开发者点击仓库的 **"Open in Codespace"** 按钮后，GitHub 在云端启动一个完整的 VS Code 开发容器，无需在本地安装任何开发环境。容器的配置由仓库中的 `.devcontainer/` 目录定义。
 
-```
+```text
 开发者点击 Open in Codespace
     → GitHub 按 .devcontainer/ 配置构建容器
     → 启动云端 VS Code

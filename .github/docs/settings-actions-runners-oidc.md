@@ -43,7 +43,7 @@ workflow 在运行时会获得一个包含 `sub`（subject claim）字段的 OID
 
 默认 `sub` 格式为：
 
-```
+```text
 repo:<owner>/<repo>:ref:refs/heads/<branch>
 ```
 

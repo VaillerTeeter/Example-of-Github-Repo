@@ -40,6 +40,7 @@
 | **GitHub 账户 Notifications** | 个人级别，针对关注的仓库/Issue/PR 推送通知 |
 | **Webhooks** | 灵活推送任意事件到 Slack、Discord、自建服务等 |
 | **Actions + 通知 Step** | 在 workflow 中按条件发送邮件/即时消息通知 |
+
 ---
 
 ## 本仓库配置汇总

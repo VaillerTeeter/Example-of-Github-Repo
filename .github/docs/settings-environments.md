@@ -48,7 +48,7 @@ jobs:
 
 ## 典型使用模式
 
-```
+```text
 development  → 无保护规则，快速迭代
 staging      → Wait timer 5 分钟，限制从 main 分支部署
 production   → Required reviewers 2 人 + Wait timer 10 分钟，仅允许 v* 标签
