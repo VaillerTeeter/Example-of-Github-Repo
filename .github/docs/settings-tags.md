@@ -42,6 +42,6 @@ Rulesets 支持：
 ## 本仓库配置汇总
 
 | 功能 | 状态 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | 经典 Protected tags | 已废弃 | 所有浏览器中已不可用 |
 | protect-version-tags Ruleset | ✅ Active | 保护所有 `v*` 标签 |

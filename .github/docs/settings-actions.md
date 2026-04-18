@@ -9,7 +9,7 @@
 控制本仓库中的 workflow 可以使用哪些来源的 Actions 和 Reusable Workflows。
 
 | 选项 | 说明 |
-|------|------|
+| --- | --- |
 | Allow all actions and reusable workflows | 允许使用任意来源的 Action，包括第三方 |
 | Disable actions | 完全禁用 Actions 功能 |
 | Allow VaillerTeeter actions and reusable workflows | 仅允许本账号名下仓库的 Action |
@@ -61,7 +61,7 @@ Actions 缓存（如依赖包缓存）在最后一次访问后 7 天内未被使
 控制来自 Fork 仓库的 PR 在触发 workflow 时是否需要手动审批，防止陌生贡献者的 PR 自动运行恶意 workflow 并读取仓库 Secrets。
 
 | 选项 | 说明 |
-|------|------|
+| --- | --- |
 | Require approval for first-time contributors who are new to GitHub | 仅对 GitHub 新账号（从未有 commit/PR 合并记录）要求审批 |
 | Require approval for first-time contributors | 在本仓库第一次贡献的用户都需审批（默认推荐） |
 | Require approval for all external contributors | 所有非成员/Owner 的用户每次 PR 都需审批 |
@@ -77,7 +77,7 @@ Actions 缓存（如依赖包缓存）在最后一次访问后 7 天内未被使
 设置 `GITHUB_TOKEN` 在 workflow 中的默认权限级别，可在具体 workflow YAML 中通过 `permissions:` 字段覆盖。
 
 | 选项 | 说明 |
-|------|------|
+| --- | --- |
 | Read and write permissions | 所有 scope 均可读写，风险较高 |
 | Read repository contents and packages permissions | 仅 contents 和 packages 可读，其余默认禁止 |
 
@@ -96,10 +96,10 @@ Actions 缓存（如依赖包缓存）在最后一次访问后 7 天内未被使
 ## 本仓库配置汇总
 
 | 功能 | 状态 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | Actions permissions | Allow all actions | 模板仓库保持宽松，实际项目可收紧 |
 | Fork PR workflow approval | ✅ Require first-time contributors | GitHub 推荐默认值 |
 | Artifact & log retention | 90 天 | 账号最大值，无需修改 |
 | Cache retention | 7 天 | 未使用缓存，默认即可 |
-| Workflow permissions | ✅ Read-only（contents: read）| 最小权限原则 |
+| Workflow permissions | ✅ Read-only（contents: read） | 最小权限原则 |
 | Allow Actions to create PRs | — 未启用 | 无自动化发布需求 |
