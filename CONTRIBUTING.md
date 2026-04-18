@@ -56,7 +56,7 @@ gh pr create --title "标题" --body "内容" --base master
 使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
 
 | 前缀 | 用途 |
-|------|------|
+| --- | --- |
 | `feat:` | 新功能 |
 | `fix:` | Bug 修复 |
 | `docs:` | 文档变更 |

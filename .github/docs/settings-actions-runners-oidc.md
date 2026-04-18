@@ -13,7 +13,7 @@
 GitHub Actions workflow 的运行环境有两种：
 
 | 类型 | 说明 |
-|------|------|
+| --- | --- |
 | GitHub-hosted runners | GitHub 提供的云端运行器（`ubuntu-latest`、`windows-latest` 等），按分钟计费，开箱即用 |
 | Self-hosted runners | 托管在自己服务器上的运行器，可自定义环境、无需额外费用，但需自行维护机器安全 |
 
@@ -56,6 +56,6 @@ repo:<owner>/<repo>:ref:refs/heads/<branch>
 ## 本仓库配置汇总
 
 | 功能 | 状态 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | Self-hosted Runners | — 未配置 | 使用 GitHub-hosted `ubuntu-latest`，无需自托管 |
 | OIDC Subject claim | 默认模板 | 无部署类 workflow，无需自定义 |

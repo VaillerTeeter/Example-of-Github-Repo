@@ -3,7 +3,7 @@
 ## 支持的版本 / Supported Versions
 
 | 版本 / Version | 支持状态 / Supported |
-|----------------|----------------------|
+| --- | --- |
 | latest (master) | ✅ |
 
 ## 报告漏洞 / Reporting a Vulnerability

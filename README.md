@@ -65,7 +65,7 @@
 使用 [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2-action) 检查所有 `*.md` 文件，规则如下：
 
 | 规则 | 状态 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | 默认全部规则 | ✅ 启用 | 包含标题格式、列表缩进、空行等 |
 | MD013 行长度限制 | ❌ 关闭 | 允许长行（文档场景不适合限制行长） |
 | MD033 内联 HTML | ❌ 关闭 | 允许在 Markdown 中使用 HTML 标签 |
@@ -76,7 +76,7 @@
 使用 [action-yamllint](https://github.com/ibiqlik/action-yamllint) 检查所有 `.yml` / `.yaml` 文件，规则如下：
 
 | 规则 | 配置 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | 基础规则 | `extends: default` | yamllint 默认规则集 |
 | 行长度 | 最长 200 字符 | 放宽默认的 80 字符限制 |
 | 布尔值写法 | 仅允许 `true` / `false` | 禁止 `yes` / `no` / `on` / `off` 等写法 |

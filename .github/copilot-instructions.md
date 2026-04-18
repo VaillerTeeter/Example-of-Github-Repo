@@ -88,7 +88,7 @@ gh run view <run-id>
 ### 禁止直接使用的替代方式
 
 | 避免使用 | 改用 |
-|----------|------|
+| --- | --- |
 | 直接 `git push origin master` | 通过功能分支 + PR 合并，禁止直接推送到 `master` |
 | GitHub 网页手动操作 Settings | `gh repo edit` |
 | GitHub MCP `mcp_io_github_git_*` 工具 | `gh` CLI 指令 |

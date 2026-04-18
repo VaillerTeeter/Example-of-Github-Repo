@@ -26,7 +26,7 @@ jobs:
 ### Protection rules（保护规则）
 
 | 规则 | 说明 |
-|------|------|
+| --- | --- |
 | **Required reviewers** | 部署前必须由指定人员手动批准，最多 6 人 |
 | **Wait timer** | 批准后延迟 N 分钟再执行（0–43200 分钟），提供人工叫停的时间窗口 |
 | **Deployment branches/tags** | 限制哪些分支或标签可部署到此环境（如仅允许 `main` 或 `v*` 标签） |
@@ -65,5 +65,5 @@ Copilot Cloud Agent 的 MCP Server 可以访问名为 **`copilot`** 的特殊 En
 ## 本仓库配置汇总
 
 | 功能 | 状态 | 说明 |
-|------|------|------|
+| --- | --- | --- |
 | Environments | — 未配置 | 模板仓库无部署流程 |
