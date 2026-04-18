@@ -13,6 +13,13 @@
 │   │   ├── bug_report_en.md          # Bug Report Template (English)
 │   │   ├── feature_request_zh.md     # 功能请求模板（中文）
 │   │   └── feature_request_en.md     # Feature Request Template (English)
+│   ├── docs/
+│   │   ├── settings-general.md
+│   │   ├── settings-branches.md
+│   │   ├── settings-rules-rulesets.md
+│   │   ├── settings-actions.md
+│   │   ├── settings-advanced-security.md
+│   │   └── ...（共 19 个 GitHub 仓库配置说明文档）
 │   ├── workflows/
 │   │   └── lint.yml                  # Markdown + YAML lint CI
 │   ├── dependabot.yml                # 自动更新 Actions 依赖（每周一）
@@ -62,7 +69,7 @@
 
 ### Markdown Lint
 
-使用 [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2-action) 检查所有 `*.md` 文件，规则如下：
+使用 [markdownlint-cli2-action@v23](https://github.com/DavidAnson/markdownlint-cli2-action)（markdownlint v0.40.0）检查所有 `*.md` 文件，规则如下：
 
 | 规则 | 状态 | 说明 |
 | --- | --- | --- |
@@ -70,6 +77,7 @@
 | MD013 行长度限制 | ❌ 关闭 | 允许长行（文档场景不适合限制行长） |
 | MD033 内联 HTML | ❌ 关闭 | 允许在 Markdown 中使用 HTML 标签 |
 | MD041 首行必须是 H1 | ❌ 关闭 | 允许文件不以 H1 开头 |
+| MD060 表格列样式 | ✅ 启用 | 要求表格分隔行与数据行风格一致（compact） |
 
 ### YAML Lint
 
