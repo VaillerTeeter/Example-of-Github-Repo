@@ -34,16 +34,13 @@ enabled = true
 
 # 内置已知 TOML 文件的 schema 关联
 [[rule]]
-name      = "Cargo.toml"
-include   = ["Cargo.toml", "Cargo.lock"]
-url       = "https://json.schemastore.org/cargo.json"
+name    = "Cargo.toml"
+include = ["Cargo.toml", "Cargo.lock"]
 
 [[rule]]
-name      = "pyproject.toml"
-include   = ["pyproject.toml"]
-url       = "https://json.schemastore.org/pyproject.json"
+name    = "pyproject.toml"
+include = ["pyproject.toml"]
 
 [[rule]]
-name      = "taplo.toml"
-include   = ["taplo.toml", ".taplo.toml"]
-url       = "https://taplo.tamasfe.dev/schema.json"
+name    = "taplo.toml"
+include = ["taplo.toml", ".taplo.toml"]

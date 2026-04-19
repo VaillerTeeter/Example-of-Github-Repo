@@ -35,7 +35,29 @@
     "toolchain",
     "toml",
     "workdir",
-    "yaml"
+    "yaml",
+    "statix",
+    "ocamlformat",
+    "perlcriticrc",
+    "pylintrc",
+    "lintr",
+    "scalafmt",
+    "solhint",
+    "swiftlint",
+    "graphqlrc",
+    "taplo",
+    "chktexrc",
+    "chktex",
+    "commitlintrc",
+    "buildifier",
+    "bazel",
+    "cfnlintrc",
+    "robocop",
+    "bugprone",
+    "flawfinder",
+    "cppcoreguidelines",
+    "bjarne",
+    "hicpp"
   ],
 
   "flagWords": [
@@ -140,7 +162,18 @@
     },
     {
       "filename": "**/*.{yaml,yml}",
-      "words": ["kubernetes", "kubectl", "configmap", "kubeconfig", "ingress", "daemonset", "statefulset", "namespace", "pvc", "svc"]
+      "words": [
+        "kubernetes",
+        "kubectl",
+        "configmap",
+        "kubeconfig",
+        "ingress",
+        "daemonset",
+        "statefulset",
+        "namespace",
+        "pvc",
+        "svc"
+      ]
     },
     {
       "filename": "**/*.{tf,tfvars}",

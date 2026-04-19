@@ -1,0 +1,6 @@
+shellcheck:
+  exclude:
+    - SC2015  # A && B || C is not if-then-else; acceptable pattern in CI scripts
+    - SC2016  # Expressions don't expand in single quotes; intentional in some contexts
+    - SC2046  # Quote to prevent word splitting; filenames in this repo have no spaces
+    - SC2126  # Use grep -c instead of grep|wc -l; stylistic preference only
