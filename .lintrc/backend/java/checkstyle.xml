@@ -32,6 +32,12 @@
     <property name="message" value="行尾不允许有多余空格"/>
   </module>
 
+  <!-- 行长度：最多 100 字符（文件级检查，必须在 Checker 下） -->
+  <module name="LineLength">
+    <property name="max" value="100"/>
+    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+  </module>
+
   <!-- ── 树遍历检查（Token-based） ──────────────────── -->
   <module name="TreeWalker">
 
@@ -139,12 +145,6 @@
     <!-- 方法参数数：最多 5 个 -->
     <module name="ParameterNumber">
       <property name="max" value="5"/>
-    </module>
-
-    <!-- 行长度：最多 100 字符 -->
-    <module name="LineLength">
-      <property name="max" value="100"/>
-      <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     </module>
 
     <!-- 匿名类长度：最多 20 行 -->

@@ -9,7 +9,7 @@
   "parserOptions": {
     "ecmaVersion": 2022,
     "sourceType": "module",
-    "project": "./tsconfig-lint.json"
+    "project": ".lintrc/frontend/typescript/tsconfig-lint.json"
   },
   "plugins": [
     "@typescript-eslint",
@@ -36,7 +36,7 @@
   ],
   "settings": {
     "import/resolver": {
-      "typescript": { "project": "./tsconfig-lint.json" }
+      "typescript": { "project": ".lintrc/frontend/typescript/tsconfig-lint.json" }
     }
   },
   "rules": {
