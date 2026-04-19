@@ -28,10 +28,6 @@ trailing_newline = true
 reorder_keys = false
 reorder_arrays = false
 
-[schema]
-# 开启 JSON Schema 验证（taplo check）
-enabled = true
-
 # 内置已知 TOML 文件的 schema 关联
 [[schema]]
 path = "Cargo.toml"
