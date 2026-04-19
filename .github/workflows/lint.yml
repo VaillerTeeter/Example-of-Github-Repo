@@ -1742,6 +1742,7 @@ jobs:
           mapfile -t TF_DIRS < <(find . -name "*.tf" \
             ! -path "./.github/*" ! -path "./.terraform/*" \
             -exec dirname {} \; | sort -u)
+          # shellcheck disable=SC2015
           for dir in "${TF_DIRS[@]}"; do
             echo "Validating: $dir"
             (cd "$dir" && terraform init -backend=false -input=false -no-color 2>&1 | tail -1 \
@@ -1920,6 +1921,7 @@ jobs:
       - name: actionlint
         if: steps.check-gha.outputs.found == 'true'
         run: |
+          # shellcheck disable=SC2016
           actionlint \
             -config-file .github/actionlint.yaml \
             -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' \
