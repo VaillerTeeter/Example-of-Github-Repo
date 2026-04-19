@@ -1,3 +1,4 @@
+---
 version: v2
 
 # ============================================================
@@ -69,6 +70,5 @@ breaking:
   ignore:
     - vendor
     - gen
-
-  # 比较目标（CI 中通过 buf breaking --against 指定）
-  # against: ".git#branch=main"
+# 比较目标（CI 中通过 buf breaking --against 指定）
+# against: ".git#branch=main"

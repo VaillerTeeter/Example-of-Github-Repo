@@ -18,7 +18,7 @@ array_trailing_comma = true
 column_width = 120
 
 # 缩进字符
-indent_string = "  "   # 2 空格
+indent_string = "  " # 2 空格
 
 # 表格间的空行数
 indent_tables = false
@@ -34,13 +34,13 @@ enabled = true
 
 # 内置已知 TOML 文件的 schema 关联
 [[rule]]
-name    = "Cargo.toml"
+name = "Cargo.toml"
 include = ["Cargo.toml", "Cargo.lock"]
 
 [[rule]]
-name    = "pyproject.toml"
+name = "pyproject.toml"
 include = ["pyproject.toml"]
 
 [[rule]]
-name    = "taplo.toml"
+name = "taplo.toml"
 include = ["taplo.toml", ".taplo.toml"]

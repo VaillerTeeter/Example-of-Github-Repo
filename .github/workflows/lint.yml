@@ -1845,7 +1845,8 @@ jobs:
                -o -path "*/manifests/*" -o -path "*/deploy/*" \
                -o -path "*/chart/*" -o -path "*/charts/*" \
                -o -path "*/helm/*" \) \
-            ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
+            ! -path "./.github/*" ! -path "./vendor/*" \
+            ! -path "./.lintrc/*" 2>/dev/null)
           kubeconform \
             -strict \
             -ignore-missing-schemas \
@@ -1916,7 +1917,7 @@ jobs:
         if: steps.check-gha.outputs.found == 'true'
         run: |
           actionlint \
-            -config .lintrc/general/actionlint.yaml \
+            -config-file .lintrc/general/actionlint.yaml \
             -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' \
             .github/workflows/*.yml
 
@@ -2962,7 +2963,9 @@ jobs:
           python-version: '3.12'
 
       - name: Install Semgrep
-        run: pip install semgrep==1.102.0
+        run: |
+          pip install setuptools
+          pip install semgrep==1.102.0
 
       - name: Run Semgrep SAST
         run: |
@@ -2989,15 +2992,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@v0.28.0
-        with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          ignore-unfixed: true
-          vuln-type: 'library'
-          severity: 'CRITICAL,HIGH,MEDIUM'
-          trivyignores: '.lintrc/security/.trivyignore'
-          exit-code: '1'
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sh -s -- -b /usr/local/bin
+          trivy fs \
+            --ignore-unfixed \
+            --vuln-type library \
+            --severity CRITICAL,HIGH,MEDIUM \
+            --ignorefile .lintrc/security/.trivyignore \
+            --exit-code 1 \
+            .
 
   container-scan:
     name: Container Image Scan (Trivy)
@@ -3024,16 +3028,22 @@ jobs:
             -t scan-target:latest \
             "$(dirname "${{ steps.check.outputs.dockerfile }}")"
 
+      - name: Install Trivy
+        if: steps.check.outputs.found == 'true'
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sh -s -- -b /usr/local/bin
+
       - name: Run Trivy image scan
         if: steps.check.outputs.found == 'true'
-        uses: aquasecurity/trivy-action@v0.28.0
-        with:
-          image-ref: 'scan-target:latest'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH,MEDIUM'
-          trivyignores: '.lintrc/security/.trivyignore'
-          exit-code: '1'
+        run: |
+          trivy image \
+            --ignore-unfixed \
+            --vuln-type os,library \
+            --severity CRITICAL,HIGH,MEDIUM \
+            --ignorefile .lintrc/security/.trivyignore \
+            --exit-code 1 \
+            scan-target:latest
 
   license-check:
     name: License Compliance Check
@@ -3066,8 +3076,11 @@ jobs:
         run: |
           if [ -f "requirements.txt" ] || [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
             pip install pip-licenses==5.0.0
-            pip-licenses \
-              --allow-only="MIT License;Apache Software License;BSD License;ISC License (ISCL);Python Software Foundation License;The Unlicense (Unlicense);CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
+            ALLOWED="MIT License;Apache Software License;BSD License"
+            ALLOWED="$ALLOWED;ISC License (ISCL);Python Software Foundation License"
+            ALLOWED="$ALLOWED;The Unlicense (Unlicense)"
+            ALLOWED="$ALLOWED;CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
+            pip-licenses --allow-only="$ALLOWED"
           else
             echo "No Python project files found, skipping Python license check."
           fi
@@ -4038,6 +4051,10 @@ jobs:
           COUNT=$(find . -name "*.md" -o -name "*.rst" -o -name "*.adoc" -o -name "*.txt" \
             | grep -v "node_modules\|vendor\|\.git" | wc -l)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Install xsltproc
+        if: steps.check.outputs.count != '0'
+        run: sudo apt-get install -y xsltproc
 
       - name: Install vale
         if: steps.check.outputs.count != '0'

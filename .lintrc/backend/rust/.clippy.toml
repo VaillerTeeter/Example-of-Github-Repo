@@ -31,17 +31,17 @@ check-private-items = true
 # ── 禁用方法列表（推荐显式错误处理） ────────────────
 # 生产代码中禁止使用 unwrap/expect，推荐使用 ? 操作符或 map_err
 disallowed-methods = [
-  { path = "std::option::Option::unwrap",  reason = "请使用 '?' 或 ok_or/map_err 进行显式错误处理" },
-  { path = "std::result::Result::unwrap",  reason = "请使用 '?' 或 map_err 进行显式错误处理" },
-  { path = "std::option::Option::expect",  reason = "仅限测试或明确 panic 场景，生产代码请改用显式处理" },
-  { path = "std::result::Result::expect",  reason = "仅限测试或明确 panic 场景，生产代码请改用显式处理" }
+  { path = "std::option::Option::unwrap", reason = "请使用 '?' 或 ok_or/map_err 进行显式错误处理" },
+  { path = "std::result::Result::unwrap", reason = "请使用 '?' 或 map_err 进行显式错误处理" },
+  { path = "std::option::Option::expect", reason = "仅限测试或明确 panic 场景，生产代码请改用显式处理" },
+  { path = "std::result::Result::expect", reason = "仅限测试或明确 panic 场景，生产代码请改用显式处理" },
 ]
 
 # ── 禁用宏列表 ───────────────────────────────────────
 disallowed-macros = [
-  { path = "std::panic",          reason = "生产代码应返回 Result/Option 而非 panic！" },
-  { path = "std::todo",           reason = "合并前须完成 TODO 代码" },
-  { path = "std::unimplemented",  reason = "合并前须实现该功能" }
+  { path = "std::panic", reason = "生产代码应返回 Result/Option 而非 panic！" },
+  { path = "std::todo", reason = "合并前须完成 TODO 代码" },
+  { path = "std::unimplemented", reason = "合并前须实现该功能" },
 ]
 
 # ── 命名规范 ─────────────────────────────────────────

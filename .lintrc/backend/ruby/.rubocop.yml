@@ -1,3 +1,4 @@
+---
 # Ruby 代码检查配置 — RuboCop
 # 目标 Ruby 版本：3.2+
 # 运行：bundle exec rubocop --config .rubocop.yml
@@ -36,7 +37,7 @@ Layout/LineLength:
   Max: 100
   AllowedPatterns:
     - '\A\s*#'  # 注释行不限制
-    - "^\s*it .* do$"
+    - '^\s*it .* do$'
   IgnoredPatterns:
     - "https?://"
 

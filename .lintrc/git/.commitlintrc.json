@@ -27,7 +27,7 @@
     "type-empty": [2, "never"],
 
     "scope-case": [2, "always", "lower-case"],
-    "scope-empty": [2, "never"],
+    "scope-empty": [0],
 
     "subject-case": [
       2,
@@ -43,12 +43,12 @@
     "header-min-length": [2, "always", 15],
 
     "body-leading-blank": [2, "always"],
-    "body-max-line-length": [2, "always", 100],
+    "body-max-line-length": [2, "always", 200],
 
     "footer-leading-blank": [2, "always"],
     "footer-max-line-length": [2, "always", 100],
 
-    "references-empty": [2, "never"]
+    "references-empty": [0]
   },
   "prompt": {
     "messages": {

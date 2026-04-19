@@ -1,3 +1,4 @@
+---
 run:
   timeout: 5m
   issues-exit-code: 1
@@ -66,7 +67,7 @@ linters:
     - nilerr          # 禁止 `if err != nil { return nil }` 错误模式
     - nilnil          # 禁止返回 (nil, nil)
     - ireturn         # 接口返回检查
-    - forcetypeassert # 禁止非安全类型断言
+    - forcetypeassert  # 禁止非安全类型断言
 
   disable:
     - exhaustruct    # 结构体所有字段赋值（过于严格）
@@ -143,7 +144,7 @@ linters-settings:
       - experimental
     disabled-checks:
       - hugeParam        # 按值传递大结构体（有时是故意的）
-      - paramTypeCombine # 合并参数类型
+      - paramTypeCombine  # 合并参数类型
 
   revive:
     severity: error

@@ -1,3 +1,4 @@
+---
 # Checkov 配置 — IaC 安全扫描
 # 文档：https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html
 # 用法：checkov --config-file .lintrc/infrastructure/checkov.yaml

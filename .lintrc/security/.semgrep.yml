@@ -7,6 +7,7 @@
 #                   --config p/jwt \
 #                   --config p/xss
 
+---
 rules:
   # ============================================================
   # A01: Broken Access Control
@@ -289,7 +290,9 @@ rules:
       - pattern: $MODEL(**request.json())
       - pattern: $Model(**request.form)
       - pattern: $Model(**$REQUEST.data)
-    message: "Potential mass assignment. Explicitly allowlist fields instead of passing raw request data to model constructors."
+    message: >-
+      Potential mass assignment. Explicitly allowlist fields instead of
+      passing raw request data to model constructors.
     languages: [python]
     severity: ERROR
     metadata:
@@ -307,7 +310,9 @@ rules:
           $F.newDocumentBuilder().parse($INPUT);
       - pattern: SAXParserFactory.newInstance().newSAXParser().parse($INPUT, ...)
       - pattern: XMLInputFactory.newInstance().createXMLStreamReader($INPUT)
-    message: "Potential XXE in Java XML parser. Disable external entities: factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)."
+    message: >-
+      Potential XXE in Java XML parser. Disable external entities:
+      factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true).
     languages: [java]
     severity: ERROR
     metadata:

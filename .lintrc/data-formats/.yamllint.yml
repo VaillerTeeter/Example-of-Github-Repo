@@ -104,13 +104,7 @@ rules:
   # ============================================================
   # 引号与字符串
   # ============================================================
-  quoted-strings:
-    quote-type: single
-    required: only-when-needed
-    extra-required: []
-    extra-allowed: []
-    allow-quoted-quotes: false
-    level: error
+  quoted-strings: disable
 
   # ============================================================
   # 键

@@ -66,14 +66,39 @@ exclude = [
 # D   = pydocstyle（docstring 规范）
 # FURB= refurb（代码现代化）
 select = [
-  "E", "W", "F", "I", "N", "UP",
-  "B", "B9", "C4", "SIM", "ANN",
-  "S", "PT", "RET", "RUF",
-  "PL", "TRY", "FLY", "PERF",
-  "Q", "TCH", "TID", "G",
-  "PIE", "T20", "ARG", "DTZ",
-  "A", "EM", "LOG",
-  "ERA", "D", "FURB",
+  "E",
+  "W",
+  "F",
+  "I",
+  "N",
+  "UP",
+  "B",
+  "B9",
+  "C4",
+  "SIM",
+  "ANN",
+  "S",
+  "PT",
+  "RET",
+  "RUF",
+  "PL",
+  "TRY",
+  "FLY",
+  "PERF",
+  "Q",
+  "TCH",
+  "TID",
+  "G",
+  "PIE",
+  "T20",
+  "ARG",
+  "DTZ",
+  "A",
+  "EM",
+  "LOG",
+  "ERA",
+  "D",
+  "FURB",
 ]
 
 ignore = [
@@ -102,7 +127,7 @@ ignore = [
   "ERA",     # 测试允许注释掉的调试代码
 ]
 "conftest.py" = ["ANN", "S101", "D"]
-"**/__init__.py" = ["F401"]  # 允许 __init__ 中的未使用导入
+"**/__init__.py" = ["F401"] # 允许 __init__ 中的未使用导入
 
 # ============================================================
 # 规则细节
@@ -126,7 +151,13 @@ parametrize-names-type = "tuple"
 known-first-party = ["src", "app"]
 force-single-line = false
 lines-after-imports = 2
-section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
 
 [lint.mccabe]
 max-complexity = 10

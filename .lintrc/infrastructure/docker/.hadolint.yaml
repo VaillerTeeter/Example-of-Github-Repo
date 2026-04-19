@@ -1,3 +1,4 @@
+---
 # Hadolint — Dockerfile lint 配置
 # 文档：https://github.com/hadolint/hadolint
 # 用法：hadolint --config .hadolint.yaml Dockerfile
@@ -5,15 +6,15 @@
 # ============================================================
 # 忽略特定规则（全局）
 # ============================================================
-ignore:
-  # DL3008: apt-get 安装时固定版本号 — 基础镜像构建中有时不现实
-  # - DL3008
+ignore: []
+# DL3008: apt-get 安装时固定版本号 — 基础镜像构建中有时不现实
+# - DL3008
 
-  # DL3009: 删除 apt-get 缓存 — 已通过 dockerfile best practice 推荐
-  # - DL3009
+# DL3009: 删除 apt-get 缓存 — 已通过 dockerfile best practice 推荐
+# - DL3009
 
-  # SC2086: 双引号变量展开 — 在 Dockerfile 中较为常见
-  # - SC2086
+# SC2086: 双引号变量展开 — 在 Dockerfile 中较为常见
+# - SC2086
 
 # ============================================================
 # 规则严重级别覆盖

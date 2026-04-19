@@ -1,3 +1,4 @@
+---
 shellcheck:
   exclude:
     - SC2015  # A && B || C is not if-then-else; acceptable pattern in CI scripts
