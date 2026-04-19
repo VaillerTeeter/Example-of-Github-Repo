@@ -22,7 +22,7 @@ severity    = "HIGH"
 description = "Global allowlist"
 paths = [
   '''.gitleaks\.toml''',
-  '''(.*?)(jpg|gif|doc|docx|pdf|bin|svg|socket)$''',
+  '''(?i)(.*?)\.(jpg|gif|doc|docx|pdf|bin|svg|socket)$''',
   '''(go\.sum|package-lock\.json|yarn\.lock|Cargo\.lock|composer\.lock)''',
   '''.env\.example''',
   '''.env\.sample'''

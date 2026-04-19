@@ -1994,7 +1994,6 @@ jobs:
   elixir-lint:
     name: Elixir Lint (Credo + mix format)
     runs-on: ubuntu-latest
-    if: hashFiles('mix.exs') != ''
     steps:
       - uses: actions/checkout@v4
 

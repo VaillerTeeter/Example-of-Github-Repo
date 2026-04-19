@@ -11,12 +11,27 @@ rules:
   # ============================================================
   # A01: Broken Access Control
   # ============================================================
-  - id: no-hardcoded-admin-bypass
+  - id: no-hardcoded-admin-bypass-python
     pattern-either:
-      - pattern: if $USER == "admin"
-      - pattern: if $ROLE == "admin"
+      - pattern: |
+          if $USER == "admin":
+              ...
+      - pattern: |
+          if $ROLE == "admin":
+              ...
     message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
-    languages: [python, javascript, typescript, java, ruby, go]
+    languages: [python]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-284: Improper Access Control"
+      owasp: "A01:2021 - Broken Access Control"
+
+  - id: no-hardcoded-admin-bypass-js
+    pattern-either:
+      - pattern: if ($USER == "admin") { ... }
+      - pattern: if ($ROLE == "admin") { ... }
+    message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
+    languages: [javascript, typescript, java]
     severity: ERROR
     metadata:
       cwe: "CWE-284: Improper Access Control"
@@ -96,9 +111,17 @@ rules:
   - id: hardcoded-iv
     pattern-either:
       - pattern: iv = b"..."
+      - pattern: iv = "..."
       - pattern: IV = "..."
     message: "Hardcoded IV/nonce detected. Generate a random IV for each encryption operation."
-    languages: [python, java, javascript, typescript]
+    languages: [python]
+
+  - id: hardcoded-iv-jsts
+    pattern-either:
+      - pattern: iv = "..."
+      - pattern: IV = "..."
+    message: "Hardcoded IV/nonce detected. Generate a random IV for each encryption operation."
+    languages: [java, javascript, typescript]
     severity: ERROR
     metadata:
       cwe: "CWE-330: Use of Insufficiently Random Values"
@@ -170,7 +193,6 @@ rules:
 
   - id: insecure-cors-wildcard
     pattern-either:
-      - pattern: Access-Control-Allow-Origin = "*"
       - pattern: 'cors({ origin: "*" })'
       - pattern: CORS(app, origins="*")
     message: "Wildcard CORS policy exposes APIs to any origin. Specify allowed origins explicitly."
