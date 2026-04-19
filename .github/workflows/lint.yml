@@ -248,35 +248,38 @@ jobs:
       - name: black (format check)
         if: steps.check-py.outputs.found == 'true'
         run: |
-          black --check --diff \
-            $(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+          mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+          black --check --diff "${PY_FILES[@]}"
 
       - name: isort (import order check)
         if: steps.check-py.outputs.found == 'true'
         run: |
-          isort --check-only --diff \
-            $(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+          mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+          isort --check-only --diff "${PY_FILES[@]}"
 
       - name: flake8 (style + bug patterns)
         if: steps.check-py.outputs.found == 'true'
         run: |
+          mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
           flake8 \
             --config .lintrc/backend/python/.flake8 \
-            $(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+            "${PY_FILES[@]}"
 
       - name: pylint (deep static analysis)
         if: steps.check-py.outputs.found == 'true'
         run: |
+          mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
           pylint \
             --rcfile=.lintrc/backend/python/.pylintrc \
-            $(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+            "${PY_FILES[@]}"
 
       - name: mypy (type checking)
         if: steps.check-py.outputs.found == 'true'
         run: |
+          mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
           mypy \
             --config-file=.lintrc/backend/python/mypy.ini \
-            $(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
+            "${PY_FILES[@]}"
 
       - name: bandit (security scan)
         if: steps.check-py.outputs.found == 'true'
@@ -320,9 +323,10 @@ jobs:
           CS_VER="10.21.4"
           curl -sSL "https://github.com/checkstyle/checkstyle/releases/download/checkstyle-${CS_VER}/checkstyle-${CS_VER}-all.jar" \
             -o checkstyle.jar
+          mapfile -t JAVA_FILES_CS < <(find . -name "*.java" ! -path "./.github/*" 2>/dev/null)
           java -jar checkstyle.jar \
             -c .lintrc/backend/java/checkstyle.xml \
-            $(find . -name "*.java" ! -path "./.github/*" 2>/dev/null)
+            "${JAVA_FILES_CS[@]}"
 
       - name: PMD (static analysis)
         if: steps.check-java.outputs.found == 'true'
@@ -1843,7 +1847,7 @@ jobs:
             -strict \
             -ignore-missing-schemas \
             -summary \
-            -output github \
+            -output text \
             -kubernetes-version 1.32.0 \
             "${K8S_FILES[@]}"
 
@@ -1909,6 +1913,7 @@ jobs:
         if: steps.check-gha.outputs.found == 'true'
         run: |
           actionlint \
+            -config-file .github/actionlint.yaml \
             -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' \
             .github/workflows/*.yml
 
@@ -1989,6 +1994,7 @@ jobs:
   elixir-lint:
     name: Elixir Lint (Credo + mix format)
     runs-on: ubuntu-latest
+    if: hashFiles('mix.exs') != ''
     steps:
       - uses: actions/checkout@v4
 
@@ -2068,8 +2074,9 @@ jobs:
       - name: Check Fourmolu formatting
         if: steps.check.outputs.count != '0'
         run: |
+          mapfile -t HS_FILES < <(find . -name "*.hs" | grep -v "\.stack-work\|dist-newstyle\|vendor")
           fourmolu --mode check \
-            $(find . -name "*.hs" | grep -v "\.stack-work\|dist-newstyle\|vendor")
+            "${HS_FILES[@]}"
 
   erlang-lint:
     name: Erlang Lint (Elvis)
@@ -2334,7 +2341,7 @@ jobs:
 
       - name: Set up clj-kondo
         if: steps.check.outputs.count != '0'
-        uses: DeLaGuardo/setup-clj-kondo@0.7.0
+        uses: DeLaGuardo/setup-clj-kondo@v1
         with:
           version: 'latest'
 
@@ -2728,7 +2735,7 @@ jobs:
 
       - name: Install cfn-lint
         if: steps.check.outputs.count != '0'
-        run: pip install cfn-lint==1.23.2
+        run: pip install cfn-lint==1.23.1
 
       - name: Run cfn-lint
         if: steps.check.outputs.count != '0'
@@ -2875,7 +2882,7 @@ jobs:
 
       - name: Set up Packer
         if: steps.check.outputs.count != '0'
-        uses: hashicorp/setup-packer@v3.1.1
+        uses: hashicorp/setup-packer@v3.1.0
         with:
           version: 'latest'
 
@@ -2950,7 +2957,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
 
       - name: Install Semgrep
         run: pip install semgrep==1.102.0
@@ -2977,7 +2984,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.27.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
@@ -3014,7 +3021,7 @@ jobs:
 
       - name: Run Trivy image scan
         if: steps.check.outputs.found == 'true'
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.27.0
         with:
           image-ref: 'scan-target:latest'
           ignore-unfixed: true
@@ -3388,6 +3395,7 @@ jobs:
         run: |
           COUNT=$(find . \( -name "*.yaml" -o -name "*.yml" \) \
             | grep -v "vendor\|node_modules" \
+            | grep -v "\.github/workflows" \
             | xargs grep -l "tekton.dev" 2>/dev/null | wc -l)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
@@ -3404,10 +3412,11 @@ jobs:
       - name: Run tekton-lint
         if: steps.check.outputs.count != '0'
         run: |
-          tekton-lint \
-            $(find . \( -name "*.yaml" -o -name "*.yml" \) \
-              | grep -v "vendor\|node_modules" \
-              | xargs grep -l "tekton.dev" 2>/dev/null | tr '\n' ' ')
+          mapfile -t TEKTON_FILES < <(find . \( -name "*.yaml" -o -name "*.yml" \) \
+            | grep -v "vendor\|node_modules" \
+            | grep -v "\.github/workflows" \
+            | xargs grep -l "tekton.dev" 2>/dev/null)
+          tekton-lint "${TEKTON_FILES[@]}"
 
   argo-lint:
     name: Argo Workflows Lint
@@ -3420,6 +3429,7 @@ jobs:
         run: |
           COUNT=$(find . \( -name "*.yaml" -o -name "*.yml" \) \
             | grep -v "vendor\|node_modules" \
+            | grep -v "\.github/workflows" \
             | xargs grep -l "argoproj.io" 2>/dev/null | wc -l)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
@@ -3437,6 +3447,7 @@ jobs:
         run: |
           find . \( -name "*.yaml" -o -name "*.yml" \) \
             | grep -v "vendor\|node_modules" \
+            | grep -v "\.github/workflows" \
             | xargs grep -l "argoproj.io" 2>/dev/null \
             | while read -r f; do
               echo "Linting $f ..."
@@ -4218,7 +4229,8 @@ jobs:
 
       - name: Install ls-lint
         run: |
-          curl -sL https://github.com/loeffel-io/ls-lint/releases/latest/download/ls-lint-linux \
+          LS_LINT_VER="2.3.1"
+          curl -sL "https://github.com/loeffel-io/ls-lint/releases/download/v${LS_LINT_VER}/ls-lint-linux-amd64" \
             -o /usr/local/bin/ls-lint && chmod +x /usr/local/bin/ls-lint
 
       - name: Run ls-lint

@@ -119,20 +119,19 @@ rules:
     forbid-duplicated-merge-keys: true
     level: error
 
-  key-ordering:
-    level: disable
+  key-ordering: disable
 
   # ============================================================
   # 真值规范化
   # ============================================================
   truthy:
     allowed-values:
-      - "true"
-      - "false"
-      - "yes"
-      - "no"
-      - "on"
-      - "off"
+      - 'true'
+      - 'false'
+      - 'yes'
+      - 'no'
+      - 'on'
+      - 'off'
     check-keys: true
     level: error
 

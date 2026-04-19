@@ -36,7 +36,7 @@ Layout/LineLength:
   Max: 100
   AllowedPatterns:
     - '\A\s*#'  # 注释行不限制
-    - "^\s*it .* do$"
+    - '^\s*it .* do$'
   IgnoredPatterns:
     - "https?://"
 

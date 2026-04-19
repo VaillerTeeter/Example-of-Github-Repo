@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-file MD041 -->
 <!-- 请根据你的 PR 类型删除不相关的部分 -->
 <!-- Please remove sections that are not relevant to your PR type -->
 

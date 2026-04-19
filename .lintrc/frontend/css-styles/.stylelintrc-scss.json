@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss"
-  ],
+  "extends": ["stylelint-config-standard-scss"],
   "plugins": ["stylelint-scss"],
   "rules": {
     "scss/at-rule-no-unknown": true,
@@ -17,7 +15,7 @@
     "color-no-invalid-hex": true,
     "declaration-block-no-duplicate-properties": [
       true,
-      {"ignore": ["consecutive-duplicates-with-different-values"]}
+      { "ignore": ["consecutive-duplicates-with-different-values"] }
     ],
     "no-duplicate-selectors": true,
     "no-empty-source": true,

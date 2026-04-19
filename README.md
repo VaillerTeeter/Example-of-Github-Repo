@@ -2855,6 +2855,7 @@ PR 中所有 commit message 经 Commitlint 检查，确保遵循 [Conventional C
 | `sca_package` | 依赖漏洞（SCA） |
 
 **配置要点**：
+
 - 严重级别：LOW / MEDIUM / HIGH / CRITICAL 全部报告
 - `soft-fail: false`：有 failed checks 时 CI 失败
 - 启用全文件 Secrets 扫描

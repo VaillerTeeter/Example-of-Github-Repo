@@ -16,11 +16,11 @@
 
 # Language extensions to warn about
 - extensions:
-  - default: false
-  - name: OverloadedStrings
-  - name: ScopedTypeVariables
-  - name: LambdaCase
-  - name: TupleSections
+    - default: false
+    - name: OverloadedStrings
+    - name: ScopedTypeVariables
+    - name: LambdaCase
+    - name: TupleSections
 
 # Ignore generated files
 - group:

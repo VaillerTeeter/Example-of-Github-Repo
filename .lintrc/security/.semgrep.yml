@@ -171,7 +171,7 @@ rules:
   - id: insecure-cors-wildcard
     pattern-either:
       - pattern: Access-Control-Allow-Origin = "*"
-      - pattern: cors({ origin: "*" })
+      - pattern: 'cors({ origin: "*" })'
       - pattern: CORS(app, origins="*")
     message: "Wildcard CORS policy exposes APIs to any origin. Specify allowed origins explicitly."
     languages: [python, javascript, typescript]

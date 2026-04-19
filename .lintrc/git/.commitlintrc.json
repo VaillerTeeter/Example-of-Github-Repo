@@ -63,19 +63,71 @@
       "type": {
         "description": "Select the type of change that you're committing:",
         "enum": {
-          "feat":     { "description": "A new feature",                          "title": "Features",          "emoji": "✨" },
-          "fix":      { "description": "A bug fix",                              "title": "Bug Fixes",         "emoji": "🐛" },
-          "docs":     { "description": "Documentation only changes",             "title": "Documentation",     "emoji": "📚" },
-          "style":    { "description": "Code style changes (formatting, etc.)",  "title": "Styles",            "emoji": "💎" },
-          "refactor": { "description": "Code change that is not fix/feature",    "title": "Code Refactoring",  "emoji": "📦" },
-          "perf":     { "description": "Code change that improves performance",  "title": "Performance",       "emoji": "🚀" },
-          "test":     { "description": "Adding or correcting tests",             "title": "Tests",             "emoji": "🚨" },
-          "build":    { "description": "Changes to build system or deps",        "title": "Builds",            "emoji": "🛠" },
-          "ci":       { "description": "Changes to CI configuration files",      "title": "CI",                "emoji": "⚙️" },
-          "chore":    { "description": "Other changes not modifying src/tests",  "title": "Chores",            "emoji": "♻️" },
-          "revert":   { "description": "Reverts a previous commit",              "title": "Reverts",           "emoji": "🗑" },
-          "security": { "description": "Security vulnerability fix",             "title": "Security",          "emoji": "🔒" },
-          "deps":     { "description": "Dependency updates",                     "title": "Dependencies",      "emoji": "⬆️" }
+          "feat": {
+            "description": "A new feature",
+            "title": "Features",
+            "emoji": "✨"
+          },
+          "fix": {
+            "description": "A bug fix",
+            "title": "Bug Fixes",
+            "emoji": "🐛"
+          },
+          "docs": {
+            "description": "Documentation only changes",
+            "title": "Documentation",
+            "emoji": "📚"
+          },
+          "style": {
+            "description": "Code style changes (formatting, etc.)",
+            "title": "Styles",
+            "emoji": "💎"
+          },
+          "refactor": {
+            "description": "Code change that is not fix/feature",
+            "title": "Code Refactoring",
+            "emoji": "📦"
+          },
+          "perf": {
+            "description": "Code change that improves performance",
+            "title": "Performance",
+            "emoji": "🚀"
+          },
+          "test": {
+            "description": "Adding or correcting tests",
+            "title": "Tests",
+            "emoji": "🚨"
+          },
+          "build": {
+            "description": "Changes to build system or deps",
+            "title": "Builds",
+            "emoji": "🛠"
+          },
+          "ci": {
+            "description": "Changes to CI configuration files",
+            "title": "CI",
+            "emoji": "⚙️"
+          },
+          "chore": {
+            "description": "Other changes not modifying src/tests",
+            "title": "Chores",
+            "emoji": "♻️"
+          },
+          "revert": {
+            "description": "Reverts a previous commit",
+            "title": "Reverts",
+            "emoji": "🗑"
+          },
+          "security": {
+            "description": "Security vulnerability fix",
+            "title": "Security",
+            "emoji": "🔒"
+          },
+          "deps": {
+            "description": "Dependency updates",
+            "title": "Dependencies",
+            "emoji": "⬆️"
+          }
         }
       },
       "scope": {

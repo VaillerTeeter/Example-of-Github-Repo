@@ -43,9 +43,7 @@
     "postcss.config.*"
   ],
 
-  "ignoreDependencies": [
-    "@types/*"
-  ],
+  "ignoreDependencies": ["@types/*"],
 
   "ignoreBinaries": [],
 
@@ -73,16 +71,10 @@
 
   "workspaces": {
     ".": {
-      "entry": [
-        "src/index.{js,ts,jsx,tsx}",
-        "src/main.{js,ts,jsx,tsx}"
-      ]
+      "entry": ["src/index.{js,ts,jsx,tsx}", "src/main.{js,ts,jsx,tsx}"]
     },
     "packages/*": {
-      "entry": [
-        "src/index.{js,ts,jsx,tsx}",
-        "{src,lib}/index.{js,ts}"
-      ]
+      "entry": ["src/index.{js,ts,jsx,tsx}", "{src,lib}/index.{js,ts}"]
     },
     "apps/*": {
       "entry": [

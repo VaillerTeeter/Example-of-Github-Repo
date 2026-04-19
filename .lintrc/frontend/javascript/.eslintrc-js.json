@@ -87,7 +87,10 @@
     "yoda": "error",
 
     "no-shadow": "error",
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }],
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }
+    ],
 
     "camelcase": ["error", { "properties": "always" }],
     "new-cap": "error",
@@ -98,15 +101,24 @@
     "operator-assignment": "error",
 
     "max-params": ["error", 5],
-    "max-lines": ["error", { "max": 500, "skipComments": true, "skipBlankLines": true }],
-    "max-lines-per-function": ["error", { "max": 60, "skipComments": true, "skipBlankLines": true }],
+    "max-lines": [
+      "error",
+      { "max": 500, "skipComments": true, "skipBlankLines": true }
+    ],
+    "max-lines-per-function": [
+      "error",
+      { "max": 60, "skipComments": true, "skipBlankLines": true }
+    ],
     "max-depth": ["error", 3],
     "max-nested-callbacks": ["error", 3],
     "complexity": ["error", 10],
 
     "unicorn/prevent-abbreviations": "off",
     "unicorn/no-null": "off",
-    "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "camelCase": true } }],
+    "unicorn/filename-case": [
+      "error",
+      { "cases": { "kebabCase": true, "camelCase": true } }
+    ],
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/prefer-module": "off",
@@ -115,11 +127,21 @@
     "jsdoc/require-returns-description": "warn",
     "jsdoc/require-jsdoc": "off",
 
-    "import/order": ["error", {
-      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
-      "newlines-between": "always",
-      "alphabetize": { "order": "asc" }
-    }],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc" }
+      }
+    ],
     "import/no-cycle": "error",
     "import/no-self-import": "error",
     "import/no-useless-path-segments": "error",

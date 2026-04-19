@@ -1,0 +1,8 @@
+self-hosted-runner:
+  labels: []
+
+# Disable specific shellcheck rules that are intentionally suppressed in this repo.
+# SC2046: Quote this to prevent word splitting — the find results are expected to
+#         be used as separate arguments; filenames without spaces are enforced by ls-lint.
+shellcheck:
+  ignore: [SC2046]

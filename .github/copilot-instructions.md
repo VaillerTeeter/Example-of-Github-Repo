@@ -12,7 +12,10 @@
      「帮我提交」「commit 一下」「push」「创建 PR」「合并」= 明确指令
      「写完了」「改好了」「完成了」= 不是明确指令，禁止自动提交
 
-  3. 违反以上规则 = 严重错误，无论用户措辞多么模糊，均不得绕过。
+  3. 创建 PR 时，必须使用 .github/PULL_REQUEST_TEMPLATE.md 模板填写 --body 内容，
+     禁止使用自由格式描述代替模板。模板所有 section 均需填写，不得省略。
+
+  4. 违反以上规则 = 严重错误，无论用户措辞多么模糊，均不得绕过。
   ============================================================ -->
 
 ## GitHub CLI 认证配置
@@ -154,10 +157,28 @@ git commit -m "feat: 描述本次变更"
 git push origin feat/your-feature-name
 
 # 4. 创建 PR（需用户明确指示）
-gh pr create --title "标题" --body "内容" --base master
+# ⛔ --body 内容必须严格按照 .github/PULL_REQUEST_TEMPLATE.md 模板填写
+# 禁止使用自由格式描述，模板所有 section 均需填写，不得省略
+gh pr create --title "标题" --body "$(Get-Content .github/PULL_REQUEST_TEMPLATE.md -Raw)" --base master
 
 # 5. 合并 PR（需用户明确指示，使用 squash）
 gh pr merge <number> --squash --delete-branch
 ```
 
 > 合并策略统一使用 **Squash Merge**，保持 master 线性历史。
+
+### PR 模板使用规范
+
+**⛔ 创建 PR 时，`--body` 内容必须基于 `.github/PULL_REQUEST_TEMPLATE.md` 填写，不得省略任何 section。**
+
+模板 section 填写要求：
+
+| Section | 要求 |
+| --- | --- |
+| 变更类型 | 勾选对应类型，至少一项为 `[x]` |
+| 变更描述 | 用中文简要说明 PR 目的和主要改动 |
+| 关联 Issue | 有则填写 `Closes #N`，无则填写 `N/A` |
+| 改动内容 | 逐条列出具体变更，不少于 3 条 |
+| 测试说明 | 勾选已执行的测试项，并说明验证环境 |
+| 截图 | 有 UI 变化则附图；无则填写 `N/A` |
+| Checklist | 所有已完成项打勾 `[x]` |

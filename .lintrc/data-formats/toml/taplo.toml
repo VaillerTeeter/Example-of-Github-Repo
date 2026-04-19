@@ -33,17 +33,22 @@ reorder_arrays = false
 enabled = true
 
 # 内置已知 TOML 文件的 schema 关联
-[[rule]]
-name      = "Cargo.toml"
-include   = ["Cargo.toml", "Cargo.lock"]
-url       = "https://json.schemastore.org/cargo.json"
+[[schema]]
+path = "Cargo.toml"
+url  = "https://json.schemastore.org/cargo.json"
 
-[[rule]]
-name      = "pyproject.toml"
-include   = ["pyproject.toml"]
-url       = "https://json.schemastore.org/pyproject.json"
+[[schema]]
+path = "Cargo.lock"
+url  = "https://json.schemastore.org/cargo.json"
 
-[[rule]]
-name      = "taplo.toml"
-include   = ["taplo.toml", ".taplo.toml"]
-url       = "https://taplo.tamasfe.dev/schema.json"
+[[schema]]
+path = "pyproject.toml"
+url  = "https://json.schemastore.org/pyproject.json"
+
+[[schema]]
+path = "taplo.toml"
+url  = "https://taplo.tamasfe.dev/schema.json"
+
+[[schema]]
+path = ".taplo.toml"
+url  = "https://taplo.tamasfe.dev/schema.json"
