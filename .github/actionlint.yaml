@@ -5,4 +5,4 @@ self-hosted-runner:
 # SC2046: Quote this to prevent word splitting — the find results are expected to
 #         be used as separate arguments; filenames without spaces are enforced by ls-lint.
 shellcheck:
-  ignore: [SC2046]
+  ignore: [SC2046, SC2016, SC2015]

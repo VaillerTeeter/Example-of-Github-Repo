@@ -55,17 +55,17 @@ include_trailing_comma = true
 
 # 排除目录
 skip_glob = [
-    ".git/*",
-    ".github/*",
-    "__pycache__/*",
-    ".venv/*",
-    "venv/*",
-    "env/*",
-    "build/*",
-    "dist/*",
-    ".mypy_cache/*",
-    ".pytest_cache/*",
-    ".tox/*",
+  ".git/*",
+  ".github/*",
+  "__pycache__/*",
+  ".venv/*",
+  "venv/*",
+  "env/*",
+  "build/*",
+  "dist/*",
+  ".mypy_cache/*",
+  ".pytest_cache/*",
+  ".tox/*",
 ]
 
 [tool.bandit]
@@ -80,18 +80,18 @@ assert_used = { skips = ["*_test.py", "test_*.py"] }
 
 # 排除目录
 exclude_dirs = [
-    ".git",
-    ".github",
-    "__pycache__",
-    ".venv",
-    "venv",
-    "env",
-    "build",
-    "dist",
-    ".mypy_cache",
-    ".pytest_cache",
-    ".tox",
-    "tests",
+  ".git",
+  ".github",
+  "__pycache__",
+  ".venv",
+  "venv",
+  "env",
+  "build",
+  "dist",
+  ".mypy_cache",
+  ".pytest_cache",
+  ".tox",
+  "tests",
 ]
 
 # 跳过的测试 ID
@@ -105,39 +105,23 @@ minversion = "7.0"
 testpaths = ["tests"]
 
 # 默认命令行参数
-addopts = [
-    "-v",
-    "--tb=short",
-    "--strict-markers",
-    "--strict-config",
-]
+addopts = ["-v", "--tb=short", "--strict-markers", "--strict-config"]
 
 # 注册的自定义标记
-markers = [
-    "slow: 标记运行较慢的测试（使用 -m 'not slow' 跳过）",
-    "integration: 集成测试",
-    "unit: 单元测试",
-]
+markers = ["slow: 标记运行较慢的测试（使用 -m 'not slow' 跳过）", "integration: 集成测试", "unit: 单元测试"]
 
 [tool.coverage.run]
 # 覆盖率数据收集
 source = ["."]
-omit = [
-    "tests/*",
-    "test_*.py",
-    "*_test.py",
-    "setup.py",
-    ".venv/*",
-    "venv/*",
-]
+omit = ["tests/*", "test_*.py", "*_test.py", "setup.py", ".venv/*", "venv/*"]
 
 [tool.coverage.report]
 # 覆盖率报告
 exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if __name__ == .__main__.:",
-    "raise NotImplementedError",
-    "if TYPE_CHECKING:",
-    "@(abc\\.)?abstractmethod",
+  "pragma: no cover",
+  "def __repr__",
+  "if __name__ == .__main__.:",
+  "raise NotImplementedError",
+  "if TYPE_CHECKING:",
+  "@(abc\\.)?abstractmethod",
 ]

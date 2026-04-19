@@ -18,7 +18,7 @@ array_trailing_comma = true
 column_width = 120
 
 # 缩进字符
-indent_string = "  "   # 2 空格
+indent_string = "  " # 2 空格
 
 # 表格间的空行数
 indent_tables = false
