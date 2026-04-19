@@ -354,7 +354,7 @@ jobs:
           unzip -q spotbugs.zip
           SB_DIR=$(find . -maxdepth 1 -type d -name "spotbugs-*" | head -1)
 
-          # 先编译 Java 源码（SpotBugs 分析字节码）
+          # 先编�?Java 源码（SpotBugs 分析字节码）
           mapfile -t JAVA_FILES < <(find . -name "*.java" ! -path "./.github/*" 2>/dev/null)
           mkdir -p /tmp/java_classes
           javac -d /tmp/java_classes "${JAVA_FILES[@]}" 2>/dev/null || true
@@ -929,7 +929,7 @@ jobs:
       - name: dotnet format (format check)
         if: steps.check-cs.outputs.found == 'true'
         run: |
-          # 有 solution/project 文件时使用项目模式，否则按目录
+          # �?solution/project 文件时使用项目模式，否则按目�?
           if find . -name "*.sln" ! -path "./.github/*" | grep -q .; then
             find . -name "*.sln" ! -path "./.github/*" | head -1 | \
               xargs dotnet format --verify-no-changes \
@@ -1018,12 +1018,13 @@ jobs:
             phpstan analyse --configuration .lintrc/backend/php/phpstan.neon --no-progress --error-format=github
           else
             echo "No .lintrc/backend/php/phpstan.neon found, running with default config."
+            mapfile -t PHP_FILES < <(find . -name "*.php" ! -path "./vendor/*" ! -path "./.github/*" \
+              -type f | head -100)
             phpstan analyse \
               --level 9 \
               --no-progress \
               --error-format=github \
-              $(find . -name "*.php" ! -path "./vendor/*" ! -path "./.github/*" \
-                -type f | head -100)
+              "${PHP_FILES[@]}"
           fi
 
   ruby-lint:
@@ -1068,13 +1069,14 @@ jobs:
       - name: RuboCop (lint + format check)
         if: steps.check-rb.outputs.found == 'true'
         run: |
+          mapfile -t RB_FILES < <(find . \( -name "*.rb" -o -name "Rakefile" -o -name "Gemfile" \) \
+            ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           rubocop \
             --config .lintrc/backend/ruby/.rubocop.yml \
             --format github \
             --display-cop-names \
             --display-style-guide \
-            $(find . \( -name "*.rb" -o -name "Rakefile" -o -name "Gemfile" \) \
-              ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
+            "${RB_FILES[@]}"
 
   swift-lint:
     name: Swift Lint
@@ -1148,10 +1150,11 @@ jobs:
       - name: dart format (format check)
         if: steps.check-dart.outputs.found == 'true'
         run: |
+          mapfile -t DART_FMT_FILES < <(find . -name "*.dart" \
+            ! -path "./.github/*" ! -path "./.dart_tool/*" \
+            ! -path "./build/*" 2>/dev/null)
           dart format --line-length 120 --set-exit-if-changed \
-            $(find . -name "*.dart" \
-              ! -path "./.github/*" ! -path "./.dart_tool/*" \
-              ! -path "./build/*" 2>/dev/null)
+            "${DART_FMT_FILES[@]}"
 
       - name: dart analyze
         if: steps.check-dart.outputs.found == 'true'
@@ -1159,9 +1162,10 @@ jobs:
           if [ -f "pubspec.yaml" ]; then
             dart analyze --options .lintrc/backend/dart/analysis_options.yaml --fatal-infos .
           else
+            mapfile -t DART_FILES < <(find . -name "*.dart" \
+              ! -path "./.github/*" ! -path "./.dart_tool/*" 2>/dev/null)
             dart analyze --fatal-infos \
-              $(find . -name "*.dart" \
-                ! -path "./.github/*" ! -path "./.dart_tool/*" 2>/dev/null)
+              "${DART_FILES[@]}"
           fi
 
       - name: flutter analyze (Flutter project)
@@ -1385,12 +1389,12 @@ jobs:
       - name: xmllint (XSD schema validation, if schema present)
         if: steps.check-xml.outputs.found == 'true'
         run: |
-          # 有 XSD 文件时尝试交叉验证 XML；无 XSD 则跳过
+          # �?XSD 文件时尝试交叉验�?XML；无 XSD 则跳�?
           mapfile -t XSD_FILES < <(find . -name "*.xsd" \
             ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           if [ ${#XSD_FILES[@]} -gt 0 ]; then
             echo "Found XSD schemas, attempting cross-validation."
-            # 仅检查 well-formed，schema-validate 需要具体文件对应关系
+            # 仅检�?well-formed，schema-validate 需要具体文件对应关�?
             echo "XSD found, schema-validation requires per-file mapping."
           else
             echo "No XSD files found, skipping schema validation."
@@ -1478,19 +1482,21 @@ jobs:
       - name: SQLFluff lint
         if: steps.check-sql.outputs.found == 'true'
         run: |
+          mapfile -t SQL_FILES < <(find . -name "*.sql" \
+            ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           sqlfluff lint \
             --config .lintrc/data-formats/sql/.sqlfluff \
             --format github-annotation \
-            $(find . -name "*.sql" \
-              ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
+            "${SQL_FILES[@]}"
 
       - name: SQLFluff format check
         if: steps.check-sql.outputs.found == 'true'
         run: |
+          mapfile -t SQL_FMT_FILES < <(find . -name "*.sql" \
+            ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           sqlfluff format \
             --config .lintrc/data-formats/sql/.sqlfluff \
-            $(find . -name "*.sql" \
-              ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
+            "${SQL_FMT_FILES[@]}"
           git diff --exit-code -- "*.sql" || \
             (echo "::error::SQL files need formatting. Run 'sqlfluff format' locally." && exit 1)
 
@@ -1537,7 +1543,7 @@ jobs:
       - name: buf breaking change detection
         if: steps.check-proto.outputs.found == 'true'
         run: |
-          # 对比 HEAD 与 main/master 分支的破坏性变更
+          # 对比 HEAD �?main/master 分支的破坏性变�?
           AGAINST_BRANCH="${GITHUB_BASE_REF:-master}"
           if git rev-parse "origin/${AGAINST_BRANCH}" > /dev/null 2>&1; then
             buf breaking \
@@ -1929,7 +1935,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.R" -o -name "*.Rmd" \) \
-            | grep -cv "vendor\|node_modules\|renv\|\.Rproj\.user")
+            | grep -cv "vendor\|node_modules\|renv\|\.Rproj\.user" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up R
@@ -1970,7 +1976,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.groovy" \
-            | grep -cv "vendor\|node_modules\|\.gradle\|build")
+            | grep -cv "vendor\|node_modules\|\.gradle\|build" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2003,7 +2009,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.ex" -o -name "*.exs" \) \
-            | grep -cv "_build\|deps\|node_modules\|\.lintrc")
+            | grep -cv "_build\|deps\|node_modules\|\.lintrc" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Elixir
@@ -2042,7 +2048,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.hs" -o -name "*.lhs" \) \
-            | grep -cv "\.stack-work\|dist-newstyle\|vendor")
+            | grep -cv "\.stack-work\|dist-newstyle\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up HLint
@@ -2089,7 +2095,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.erl" -o -name "*.hrl" \) \
-            | grep -cv "_build\|deps\|vendor")
+            | grep -cv "_build\|deps\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Erlang/OTP
@@ -2121,7 +2127,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.pl" -o -name "*.pm" -o -name "*.t" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Perl::Critic and Perl::Tidy
@@ -2158,7 +2164,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.jl" \
-            | grep -cv "vendor\|node_modules\|\.julia")
+            | grep -cv "vendor\|node_modules\|\.julia" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Julia
@@ -2195,7 +2201,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.zig" \
-            | grep -cv "zig-cache\|zig-out\|vendor")
+            | grep -cv "zig-cache\|zig-out\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Zig
@@ -2224,7 +2230,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.nim" -o -name "*.nims" \) \
-            | grep -cv "nimcache\|vendor\|\.nimble")
+            | grep -cv "nimcache\|vendor\|\.nimble" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Nim
@@ -2261,7 +2267,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.cr" \
-            | grep -cv "vendor\|lib\|\.crystal")
+            | grep -cv "vendor\|lib\|\.crystal" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Crystal
@@ -2300,7 +2306,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.fs" -o -name "*.fsx" -o -name "*.fsi" \) \
-            | grep -cv "vendor\|node_modules\|bin\|obj")
+            | grep -cv "vendor\|node_modules\|bin\|obj" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up .NET
@@ -2337,7 +2343,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.clj" -o -name "*.cljs" -o -name "*.cljc" \) \
-            | grep -cv "vendor\|node_modules\|\.cpcache")
+            | grep -cv "vendor\|node_modules\|\.cpcache" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up clj-kondo
@@ -2382,7 +2388,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.ml" -o -name "*.mli" \) \
-            | grep -cv "_build\|vendor\|\.opam")
+            | grep -cv "_build\|vendor\|\.opam" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up OCaml
@@ -2394,7 +2400,7 @@ jobs:
       - name: Install ocamlformat
         if: steps.check.outputs.count != '0'
         run: |
-          eval $(opam env)
+          eval "$(opam env)"
           opam install -y ocamlformat
 
       - name: Set up ocamlformat config
@@ -2404,7 +2410,7 @@ jobs:
       - name: Check OCaml formatting
         if: steps.check.outputs.count != '0'
         run: |
-          eval $(opam env)
+          eval "$(opam env)"
           find . \( -name "*.ml" -o -name "*.mli" \) \
             | grep -v "_build\|vendor\|\.opam" \
             | xargs ocamlformat --check
@@ -2419,7 +2425,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.scss" -o -name "*.sass" \) \
-            | grep -cv "node_modules\|vendor\|dist\|build")
+            | grep -cv "node_modules\|vendor\|dist\|build" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2456,7 +2462,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.less" \
-            | grep -cv "node_modules\|vendor\|dist\|build")
+            | grep -cv "node_modules\|vendor\|dist\|build" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2488,7 +2494,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.svelte" \
-            | grep -cv "node_modules\|vendor\|\.svelte-kit\|dist\|build")
+            | grep -cv "node_modules\|vendor\|\.svelte-kit\|dist\|build" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2525,7 +2531,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.astro" \
-            | grep -cv "node_modules\|vendor\|dist\|build\|\.astro")
+            | grep -cv "node_modules\|vendor\|dist\|build\|\.astro" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2562,7 +2568,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name ".env*" \
-            | grep -cv "\.git\|node_modules\|vendor\|\.env\.example\|\.env\.sample")
+            | grep -cv "\.git\|node_modules\|vendor\|\.env\.example\|\.env\.sample" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install dotenv-linter
@@ -2589,7 +2595,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.csv" \
-            | grep -cv "node_modules\|vendor")
+            | grep -cv "node_modules\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Ruby
@@ -2618,7 +2624,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.nix" \
-            | grep -cv "vendor\|node_modules\|result")
+            | grep -cv "vendor\|node_modules\|result" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Nix
@@ -2655,7 +2661,7 @@ jobs:
             -o -name "docker-compose*.yaml" \
             -o -name "compose.yml" \
             -o -name "compose.yaml" \) \
-            | grep -cv "node_modules\|vendor")
+            | grep -cv "node_modules\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Validate Docker Compose files
@@ -2682,7 +2688,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "Chart.yaml" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Helm
@@ -2724,7 +2730,7 @@ jobs:
             -o -path "*/cfn/*" \
             -o -path "*/infrastructure/*" \) \
             \( -name "*.yml" -o -name "*.yaml" -o -name "*.json" \) \
-            | grep -cv "node_modules\|vendor")
+            | grep -cv "node_modules\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -2751,7 +2757,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.bicep" -o -name "*.bicepparam" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Azure CLI + Bicep
@@ -2781,7 +2787,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name ".gitlab-ci.yml" -o -name ".gitlab-ci.yaml" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -2812,7 +2818,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "Jenkinsfile*" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -2877,7 +2883,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.pkr.hcl" -o -name "*.pkr.json" -o -name "packer.json" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Packer
@@ -2913,7 +2919,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "kustomization.yml" -o -name "kustomization.yaml" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up kubectl
@@ -3080,7 +3086,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.rst" \
-            | grep -cv "vendor\|node_modules\|_build")
+            | grep -cv "vendor\|node_modules\|_build" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3102,8 +3108,9 @@ jobs:
       - name: Run doc8
         if: steps.check.outputs.count != '0'
         run: |
+          mapfile -t RST_FILES < <(find . -name "*.rst" | grep -v "vendor\|_build")
           doc8 --max-line-length 120 \
-            $(find . -name "*.rst" | grep -v "vendor\|_build")
+            "${RST_FILES[@]}"
 
   asciidoc-lint:
     name: AsciiDoc Lint (asciidoctor)
@@ -3115,7 +3122,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.adoc" -o -name "*.asciidoc" -o -name "*.asc" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Ruby
@@ -3147,7 +3154,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.tex" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install LaTeX tools
@@ -3176,7 +3183,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.ipynb" \
-            | grep -cv "vendor\|node_modules\|\.ipynb_checkpoints")
+            | grep -cv "vendor\|node_modules\|\.ipynb_checkpoints" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3217,7 +3224,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "Makefile" -o -name "GNUmakefile" -o -name "*.mk" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Go (for checkmake)
@@ -3247,7 +3254,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "CMakeLists.txt" -o -name "*.cmake" \) \
-            | grep -cv "vendor\|node_modules\|build\|CMakeFiles")
+            | grep -cv "vendor\|node_modules\|build\|CMakeFiles" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3289,7 +3296,7 @@ jobs:
             -o -name "WORKSPACE" \
             -o -name "WORKSPACE.bazel" \
             -o -name "*.bzl" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install buildifier
@@ -3335,7 +3342,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name ".drone.yml" -o -name ".drone.yaml" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3366,7 +3373,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "bitbucket-pipelines.yml" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3469,7 +3476,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.rego" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install OPA
@@ -3516,7 +3523,7 @@ jobs:
           COUNT=$(find . \
             \( -name "nginx.conf" -o -name "*.nginx" \
             -o -path "*/nginx/*.conf" -o -path "*/sites-available/*" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Nginx and gixy
@@ -3560,7 +3567,7 @@ jobs:
           COUNT=$(find . \
             \( -name "httpd.conf" -o -name "apache2.conf" \
             -o -name "*.vhost" -o -name "*.htaccess" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Apache2
@@ -3599,7 +3606,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.feature" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -3628,7 +3635,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.robot" -o -name "*.resource" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -3644,17 +3651,19 @@ jobs:
       - name: Run robocop
         if: steps.check.outputs.count != '0'
         run: |
+          mapfile -t ROBOT_FILES < <(find . \( -name "*.robot" -o -name "*.resource" \) \
+            | grep -v "vendor\|node_modules")
           robocop \
             --config .lintrc/testing/.robocop.toml \
-            $(find . \( -name "*.robot" -o -name "*.resource" \) \
-              | grep -v "vendor\|node_modules" | tr '\n' ' ')
+            "${ROBOT_FILES[@]}"
 
       - name: Check robotidy formatting
         if: steps.check.outputs.count != '0'
         run: |
+          mapfile -t ROBOT_FMT_FILES < <(find . \( -name "*.robot" -o -name "*.resource" \) \
+            | grep -v "vendor\|node_modules")
           robotidy --check --diff \
-            $(find . \( -name "*.robot" -o -name "*.resource" \) \
-              | grep -v "vendor\|node_modules" | tr '\n' ' ')
+            "${ROBOT_FMT_FILES[@]}"
 
   editorconfig-lint:
     name: EditorConfig Lint (editorconfig-checker)
@@ -3694,7 +3703,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.cue" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install CUE
@@ -3729,7 +3738,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.dhall" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install Dhall
@@ -3767,7 +3776,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . \( -name "*.k" -o -name "*.kcl" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install KCL
@@ -3810,7 +3819,7 @@ jobs:
             -o -name "asyncapi.json" \
             -o -name "*.asyncapi.yml" -o -name "*.asyncapi.yaml" \
             -o -name "*.asyncapi.json" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -3848,7 +3857,7 @@ jobs:
           COUNT=$(find . \
             \( -name "renovate.json" -o -name "renovate.json5" \
             -o -name ".renovaterc" -o -name ".renovaterc.json" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -3884,7 +3893,7 @@ jobs:
         run: |
           COUNT=$(find . \
             \( -name "*.puml" -o -name "*.plantuml" -o -name "*.pu" \) \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Java
@@ -3922,7 +3931,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.sol" \
-            | grep -cv "vendor\|node_modules")
+            | grep -cv "vendor\|node_modules" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -4009,7 +4018,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" \
-            | grep -cv "node_modules\|dist\|build\|\.next\|\.nuxt")
+            | grep -cv "node_modules\|dist\|build\|\.next\|\.nuxt" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node.js
@@ -4040,7 +4049,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name "*.md" -o -name "*.rst" -o -name "*.adoc" -o -name "*.txt" \
-            | grep -cv "node_modules\|vendor\|\.git")
+            | grep -cv "node_modules\|vendor\|\.git" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install vale
@@ -4103,7 +4112,7 @@ jobs:
         run: |
           COUNT=$(find . \( -name "*.tf" -o -name "*.yml" -o -name "*.yaml" \
             -o -name "Dockerfile*" -o -name "*.bicep" -o -name "*.json" \) \
-            | grep -cv "node_modules\|vendor\|\.git")
+            | grep -cv "node_modules\|vendor\|\.git" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -4203,7 +4212,7 @@ jobs:
         run: |
           COUNT=$(find . \( -name "*.yml" -o -name "*.yaml" \) \
             ! -path "./.github/*" \
-            | grep -cv "node_modules\|vendor")
+            | grep -cv "node_modules\|vendor" || true)
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python

@@ -27,24 +27,3 @@ trailing_newline = true
 # 重新排序 key（通常关闭，以保持语义顺序）
 reorder_keys = false
 reorder_arrays = false
-
-# 内置已知 TOML 文件的 schema 关联
-[[schema]]
-path = "Cargo.toml"
-url  = "https://json.schemastore.org/cargo.json"
-
-[[schema]]
-path = "Cargo.lock"
-url  = "https://json.schemastore.org/cargo.json"
-
-[[schema]]
-path = "pyproject.toml"
-url  = "https://json.schemastore.org/pyproject.json"
-
-[[schema]]
-path = "taplo.toml"
-url  = "https://taplo.tamasfe.dev/schema.json"
-
-[[schema]]
-path = ".taplo.toml"
-url  = "https://taplo.tamasfe.dev/schema.json"
