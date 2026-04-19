@@ -151,13 +151,7 @@ parametrize-names-type = "tuple"
 known-first-party = ["src", "app"]
 force-single-line = false
 lines-after-imports = 2
-section-order = [
-  "future",
-  "standard-library",
-  "third-party",
-  "first-party",
-  "local-folder",
-]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [lint.mccabe]
 max-complexity = 10

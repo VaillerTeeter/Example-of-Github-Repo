@@ -189,7 +189,27 @@
     "scalafix",
     "nullary",
     "Qube",
-    "LOVE"
+    "LOVE",
+    "nimpretty",
+    "Fantomas",
+    "fantomas",
+    "cljc",
+    "cljfmt",
+    "cpcache",
+    "Tcljfmt",
+    "opam",
+    "csvlint",
+    "deadnix",
+    "nixpkgs",
+    "bicepparam",
+    "failon",
+    "Pulumi",
+    "pulumi",
+    "aquasecurity",
+    "rstcheck",
+    "asciidoctor",
+    "lacheck",
+    "nbqa"
   ],
 
   "flagWords": [
