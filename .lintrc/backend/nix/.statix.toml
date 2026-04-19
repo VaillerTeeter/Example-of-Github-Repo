@@ -1,0 +1,7 @@
+[global]
+ignore = [
+  "vendor/**",
+  "node_modules/**",
+  "result/**",
+  ".direnv/**"
+]
