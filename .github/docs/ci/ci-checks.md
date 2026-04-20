@@ -2,7 +2,7 @@
 
 所有 Pull Request 合并到 `master` 前，必须通过以下自动检查（定义于 [.github/workflows/lint.yml](../../../.github/workflows/lint.yml)）：
 
-### Markdown Lint
+## Markdown Lint
 
 使用 [markdownlint-cli2-action@v23](https://github.com/DavidAnson/markdownlint-cli2-action)（markdownlint v0.40.0）检查所有 `*.md` 文件，规则如下：
 
@@ -14,7 +14,7 @@
 | MD041 首行必须是 H1 | ❌ 关闭 | 允许文件不以 H1 开头 |
 | MD060 表格列样式 | ✅ 启用 | 要求表格分隔行与数据行风格一致（compact） |
 
-### YAML Lint
+## YAML Lint
 
 使用 [action-yamllint](https://github.com/ibiqlik/action-yamllint) 检查所有 `.yml` / `.yaml` 文件，规则如下：
 
@@ -24,7 +24,7 @@
 | 行长度 | 最长 200 字符 | 放宽默认的 80 字符限制 |
 | 布尔值写法 | 仅允许 `true` / `false` | 禁止 `yes` / `no` / `on` / `off` 等写法 |
 
-### 触发时机
+## 触发时机
 
 - **PR 创建 / 更新**：目标分支为 `master` 时自动触发
 - **直接 push 到 master**（仅管理员可操作）：同样触发检查

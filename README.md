@@ -1,4 +1,4 @@
-﻿# Example-of-Github-Repo
+# Example-of-Github-Repo
 
 个人代码示例仓库，收录各类语言和框架的代码片段与实践示例。
 
