@@ -209,7 +209,19 @@
     "rstcheck",
     "asciidoctor",
     "lacheck",
-    "nbqa"
+    "nbqa",
+    "dhall",
+    "renovaterc",
+    "plantuml",
+    "startuml",
+    "enduml",
+    "gantt",
+    "startgantt",
+    "endgantt",
+    "delegatecall",
+    "jsonlint",
+    "prantlf",
+    "kubeval"
   ],
 
   "flagWords": [
@@ -335,6 +347,10 @@
     {
       "filename": "**/*.{md,mdx}",
       "words": []
+    },
+    {
+      "filename": "README.md",
+      "flagWords": []
     },
     {
       "filename": "**/*.sql",
