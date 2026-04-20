@@ -1,17 +1,17 @@
-# 贡献指南 / Contributing Guide
+# 贡献指南
 
-感谢你有兴趣为本项目做出贡献！/ Thanks for your interest in contributing!
+感谢你有兴趣为本项目做出贡献！
 
 ---
 
-## 开始之前 / Before You Start
+## 开始之前
 
-- 请先阅读 [行为准则 / Code of Conduct](./CODE_OF_CONDUCT.md)
+- 请先阅读 [行为准则](./CODE_OF_CONDUCT.md)
 - 查看现有的 [Issues](../../issues) 和 [Pull Requests](../../pulls) 以避免重复工作
 
 ---
 
-## 本地开发环境 / Local Setup
+## 本地开发环境
 
 ```powershell
 # 1. Fork 本仓库到你的账号，然后克隆
@@ -28,7 +28,7 @@ $content = Get-Content .env; foreach ($line in $content) { if ($line -match "^GH
 
 ---
 
-## 提交流程 / Submission Workflow
+## 提交流程
 
 本仓库所有变更必须通过 Pull Request 合并，**禁止直接 push 到 `master`**。
 
@@ -51,7 +51,7 @@ gh pr create --title "标题" --body "内容" --base master
 
 ---
 
-## Commit 消息规范 / Commit Message Convention
+## Commit 消息规范
 
 使用 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
 
@@ -69,7 +69,7 @@ gh pr create --title "标题" --body "内容" --base master
 
 ---
 
-## Pull Request 要求 / PR Requirements
+## Pull Request 要求
 
 - 标题清晰描述改动内容
 - 填写 PR 模板中的所有必填项
@@ -78,6 +78,6 @@ gh pr create --title "标题" --body "内容" --base master
 
 ---
 
-## 问题和讨论 / Questions
+## 问题和讨论
 
 如有疑问，欢迎通过 [Issue](../../issues/new/choose) 或 [邮件](mailto:wyc_19533480830@outlook.com) 联系。
