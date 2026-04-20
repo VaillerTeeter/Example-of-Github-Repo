@@ -17,7 +17,18 @@ rules:
       - pattern: if $USER == "admin"
       - pattern: if $ROLE == "admin"
     message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
-    languages: [python, ruby]
+    languages: [ruby]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-284: Improper Access Control"
+      owasp: "A01:2021 - Broken Access Control"
+
+  - id: no-hardcoded-admin-bypass-py
+    pattern-either:
+      - pattern: if $USER == "admin":
+      - pattern: if $ROLE == "admin":
+    message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
+    languages: [python]
     severity: ERROR
     metadata:
       cwe: "CWE-284: Improper Access Control"
