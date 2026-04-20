@@ -255,13 +255,13 @@ jobs:
         if: steps.check-py.outputs.found == 'true'
         run: |
           mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
-          black --check --diff "${PY_FILES[@]}"
+          black --config .lintrc/backend/python/pyproject.toml --check --diff "${PY_FILES[@]}"
 
       - name: isort (import order check)
         if: steps.check-py.outputs.found == 'true'
         run: |
           mapfile -t PY_FILES < <(find . -name "*.py" ! -path "./.github/*" 2>/dev/null)
-          isort --check-only --diff "${PY_FILES[@]}"
+          isort --settings-path .lintrc/backend/python/pyproject.toml --check-only --diff "${PY_FILES[@]}"
 
       - name: flake8 (style + bug patterns)
         if: steps.check-py.outputs.found == 'true'

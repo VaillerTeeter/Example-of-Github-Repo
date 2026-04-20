@@ -1,5 +1,5 @@
 # ShellCheck 配置 — https://www.shellcheck.net/wiki/Ignore
-# 放置于仓库根目录时自动被 ShellCheck 识别
+# 此文件存放于 .lintrc/infrastructure/shell/，CI 会在运行 ShellCheck 前将其复制到仓库根目录（自动发现路径）
 
 # 默认 shell 方言（bash / sh / dash / ksh）
 shell=bash
