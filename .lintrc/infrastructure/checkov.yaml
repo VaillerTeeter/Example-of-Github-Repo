@@ -52,13 +52,6 @@ skip-check:
 # ============================================================
 # 严重级别过滤
 # ============================================================
-# 报告所有级别：LOW、MEDIUM、HIGH、CRITICAL
-check:
-  - LOW
-  - MEDIUM
-  - HIGH
-  - CRITICAL
-
 # 将以下 severity 视为 error（CI 中断）
 # 其余作为 warning 继续执行
 # （注：checkov 本身无此字段，通过 --soft-fail-on 实现）

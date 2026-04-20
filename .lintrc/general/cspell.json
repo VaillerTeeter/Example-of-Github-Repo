@@ -323,8 +323,7 @@
     "pnpm-lock.yaml",
     "*.lock",
     "CHANGELOG.md",
-    "LICENSE",
-    ".lintrc/**"
+    "LICENSE"
   ],
 
   "overrides": [
