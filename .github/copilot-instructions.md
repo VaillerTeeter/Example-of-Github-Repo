@@ -161,7 +161,7 @@ git checkout -b feat/your-feature-name
 
 # 2. 完成代码修改后，暂存并提交（需用户明确指示）
 git add .
-git commit -m "feat: 描述本次变更"
+git commit -m "feat: describe your change"
 
 # 3. 推送分支到远程（需用户明确指示）
 git push origin feat/your-feature-name
@@ -169,8 +169,8 @@ git push origin feat/your-feature-name
 # 4. 创建 PR（需用户明确指示）
 # ⛔ --body 内容必须严格按照 .github/PULL_REQUEST_TEMPLATE.md 模板填写
 # 禁止直接将模板原文作为 --body 发布；必须先基于模板填写完整内容，保存到本地临时文件供用户确认后再执行
-# 例如：将填写好的内容保存到 tmp/pr-body.md，再执行下方命令
-gh pr create --title "标题" --body-file "tmp/pr-body.md" --base master
+# 例如：将填写好的内容保存到 tmp/pr-<number>-body.md，再执行下方命令
+gh pr create --title "标题" --body-file "tmp/pr-<number>-body.md" --base master
 
 # 5. 合并 PR（需用户明确指示，使用 squash）
 gh pr merge <number> --squash --delete-branch
