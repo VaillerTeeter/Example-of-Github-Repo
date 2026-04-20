@@ -1931,9 +1931,11 @@ jobs:
       - name: actionlint
         if: steps.check-gha.outputs.found == 'true'
         run: |
+          mapfile -t GHA_FILES < <(find .github/workflows -name "*.yml" \
+            -o -name "*.yaml" 2>/dev/null)
           actionlint \
             -config-file .lintrc/general/actionlint.yaml \
-            .github/workflows/*.yml
+            "${GHA_FILES[@]}"
 
   r-lint:
     name: R Lint (lintr + styler)
