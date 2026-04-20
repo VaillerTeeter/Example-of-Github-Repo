@@ -1933,9 +1933,7 @@ jobs:
         run: |
           mapfile -t GHA_FILES < <(find .github/workflows -name "*.yml" \
             -o -name "*.yaml" 2>/dev/null)
-          actionlint \
-            -config-file .lintrc/general/actionlint.yaml \
-            "${GHA_FILES[@]}"
+          actionlint "${GHA_FILES[@]}"
 
   r-lint:
     name: R Lint (lintr + styler)
