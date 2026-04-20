@@ -1,18 +1,14 @@
-# 安全策略 / Security Policy
+# 安全策略
 
-## 支持的版本 / Supported Versions
+## 支持的版本
 
-| 版本 / Version | 支持状态 / Supported |
+| 版本 | 支持状态 |
 | --- | --- |
 | latest (master) | ✅ |
 
-## 报告漏洞 / Reporting a Vulnerability
+## 报告漏洞
 
 **请勿通过公开的 GitHub Issue 报告安全漏洞。**
-
-**Please do NOT report security vulnerabilities through public GitHub Issues.**
-
-### 中文
 
 如果你发现了安全漏洞，请通过以下方式私下联系我：
 
@@ -28,20 +24,3 @@
 5. 如有可能，提供修复建议
 
 我会在 **48 小时内**确认收到你的报告，并在 **7 个工作日内**提供初步评估。
-
-### English
-
-If you discover a security vulnerability, please contact me privately via:
-
-- **Email**: [wyc_19533480830@outlook.com](mailto:wyc_19533480830@outlook.com)
-- **Subject**: `[SECURITY] Vulnerability Report - <brief description>`
-
-Please include the following in your report:
-
-1. Type of vulnerability (e.g. XSS, SQL Injection, Path Traversal)
-2. Affected file paths or components
-3. Steps to reproduce the vulnerability
-4. Potential impact of the vulnerability
-5. Suggested fix, if possible
-
-I will acknowledge receipt of your report within **48 hours** and provide an initial assessment within **7 business days**.
