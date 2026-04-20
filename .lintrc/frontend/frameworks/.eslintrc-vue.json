@@ -108,7 +108,13 @@
     "curly": ["error", "all"],
     "no-param-reassign": "error",
 
-    "import/order": ["error", { "groups": ["builtin", "external", "internal", "parent", "sibling", "index"], "newlines-between": "always" }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always"
+      }
+    ],
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
 

@@ -440,7 +440,7 @@ jobs:
         run: |
           mapfile -t JS_FILES < <(find . \
             \( -name "*.js" -o -name "*.jsx" -o -name "*.mjs" -o -name "*.cjs" \) \
-            ! -path "./.github/*" ! -path "./node_modules/*" 2>/dev/null)
+            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./node_modules/*" 2>/dev/null)
           npx eslint --max-warnings 0 --config .lintrc/frontend/javascript/.eslintrc-js.json "${JS_FILES[@]}"
 
   typescript-lint:
@@ -1347,7 +1347,7 @@ jobs:
         if: steps.check-json.outputs.found == 'true'
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           prettier --config .lintrc/frontend/prettier/.prettierrc --check "${JSON_FILES[@]}"
 
@@ -2978,8 +2978,9 @@ jobs:
 
       - name: Install Semgrep
         run: |
-          pip install setuptools
+          pip install --upgrade pip setuptools wheel
           pip install semgrep==1.102.0
+          pip install --upgrade setuptools
 
       - name: Run Semgrep SAST
         run: |

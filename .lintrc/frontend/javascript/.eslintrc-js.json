@@ -10,15 +10,7 @@
     "sourceType": "module",
     "ecmaFeatures": { "jsx": true }
   },
-  "plugins": [
-    "import",
-    "unicorn",
-    "sonarjs",
-    "security",
-    "promise",
-    "n",
-    "jsdoc"
-  ],
+  "plugins": ["import", "unicorn", "sonarjs", "security", "promise", "n", "jsdoc"],
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
@@ -118,7 +110,14 @@
     "jsdoc/require-returns-description": "warn",
     "jsdoc/require-jsdoc": "off",
 
-    "import/order": ["error", { "groups": ["builtin", "external", "internal", "parent", "sibling", "index"], "newlines-between": "always", "alphabetize": { "order": "asc" } }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc" }
+      }
+    ],
     "import/no-cycle": "error",
     "import/no-self-import": "error",
     "import/no-useless-path-segments": "error",
