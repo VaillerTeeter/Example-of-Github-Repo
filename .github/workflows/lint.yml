@@ -2978,9 +2978,9 @@ jobs:
 
       - name: Install Semgrep
         run: |
-          pip install --upgrade pip setuptools wheel
+          pip install --upgrade pip
           pip install semgrep==1.102.0
-          pip install --upgrade setuptools
+          pip install --force-reinstall setuptools
 
       - name: Run Semgrep SAST
         run: |
