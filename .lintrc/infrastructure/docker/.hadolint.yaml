@@ -1,7 +1,7 @@
 ---
 # Hadolint — Dockerfile lint 配置
 # 文档：https://github.com/hadolint/hadolint
-# 用法：hadolint --config .hadolint.yaml Dockerfile
+# 用法：hadolint --config .lintrc/infrastructure/docker/.hadolint.yaml Dockerfile
 
 # ============================================================
 # 忽略特定规则（全局）

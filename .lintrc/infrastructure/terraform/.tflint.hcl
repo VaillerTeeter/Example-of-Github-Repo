@@ -1,6 +1,6 @@
 # TFLint — Terraform / HCL lint 配置
 # 文档：https://github.com/terraform-linters/tflint
-# 用法：tflint --config .tflint.hcl
+# 用法：tflint --config .lintrc/infrastructure/terraform/.tflint.hcl
 
 # ============================================================
 # 插件（Provider 规则集）
