@@ -25,8 +25,8 @@ rules:
 
   - id: no-hardcoded-admin-bypass-py
     pattern-either:
-      - pattern: if $USER == "admin":
-      - pattern: if $ROLE == "admin":
+      - pattern: 'if $USER == "admin":'
+      - pattern: 'if $ROLE == "admin":'
     message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
     languages: [python]
     severity: ERROR
