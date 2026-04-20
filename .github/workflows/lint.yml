@@ -1933,7 +1933,6 @@ jobs:
         run: |
           actionlint \
             -config-file .lintrc/general/actionlint.yaml \
-            -format $'{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A{{replace $err.Snippet "\\n" "%0A"}}%0A{{end}}' \
             .github/workflows/*.yml
 
   r-lint:
@@ -2979,9 +2978,8 @@ jobs:
 
       - name: Install Semgrep
         run: |
-          pip install --upgrade setuptools
+          pip install setuptools
           pip install semgrep==1.102.0
-          pip install --upgrade setuptools
 
       - name: Run Semgrep SAST
         run: |

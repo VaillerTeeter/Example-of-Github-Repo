@@ -12,14 +12,7 @@
     "parser": "@typescript-eslint/parser",
     "extraFileExtensions": [".vue"]
   },
-  "plugins": [
-    "vue",
-    "@typescript-eslint",
-    "import",
-    "sonarjs",
-    "security",
-    "promise"
-  ],
+  "plugins": ["vue", "@typescript-eslint", "import", "sonarjs", "security", "promise"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -27,7 +20,7 @@
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:sonarjs/recommended",
-    "plugin:security/recommended",
+    "plugin:security/recommended-legacy",
     "plugin:promise/recommended"
   ],
   "rules": {
@@ -95,23 +88,14 @@
     "vue/v-on-style": "error",
     "vue/shorthand-property-or-attribute": "error",
     "vue/no-boolean-default": ["error", "default-false"],
-    "vue/no-unused-properties": [
-      "error",
-      { "groups": ["props", "data", "computed", "methods"] }
-    ],
+    "vue/no-unused-properties": ["error", { "groups": ["props", "data", "computed", "methods"] }],
 
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
-    ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-misused-promises": "error",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      { "prefer": "type-imports" }
-    ],
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
     "@typescript-eslint/prefer-nullish-coalescing": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/no-unnecessary-condition": "error",
@@ -124,20 +108,7 @@
     "curly": ["error", "all"],
     "no-param-reassign": "error",
 
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "newlines-between": "always"
-      }
-    ],
+    "import/order": ["error", { "groups": ["builtin", "external", "internal", "parent", "sibling", "index"], "newlines-between": "always" }],
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
 

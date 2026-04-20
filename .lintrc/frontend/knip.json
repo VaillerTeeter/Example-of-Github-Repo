@@ -13,11 +13,7 @@
     "scripts/**/*.{js,ts}"
   ],
 
-  "project": [
-    "src/**/*.{js,ts,jsx,tsx}",
-    "lib/**/*.{js,ts}",
-    "utils/**/*.{js,ts}"
-  ],
+  "project": ["src/**/*.{js,ts,jsx,tsx}", "lib/**/*.{js,ts}", "utils/**/*.{js,ts}"],
 
   "ignore": [
     "**/*.d.ts",
@@ -77,11 +73,7 @@
       "entry": ["src/index.{js,ts,jsx,tsx}", "{src,lib}/index.{js,ts}"]
     },
     "apps/*": {
-      "entry": [
-        "src/index.{js,ts,jsx,tsx}",
-        "src/main.{js,ts,jsx,tsx}",
-        "src/app.{js,ts,jsx,tsx}"
-      ]
+      "entry": ["src/index.{js,ts,jsx,tsx}", "src/main.{js,ts,jsx,tsx}", "src/app.{js,ts,jsx,tsx}"]
     }
   }
 }

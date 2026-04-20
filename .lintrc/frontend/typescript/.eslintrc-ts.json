@@ -29,7 +29,7 @@
     "plugin:import/typescript",
     "plugin:unicorn/recommended",
     "plugin:sonarjs/recommended",
-    "plugin:security/recommended",
+    "plugin:security/recommended-legacy",
     "plugin:promise/recommended",
     "plugin:n/recommended",
     "plugin:jsdoc/recommended-typescript"
@@ -43,10 +43,7 @@
   },
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      { "allowExpressions": true }
-    ],
+    "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": true }],
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -109,10 +106,7 @@
     "yoda": "error",
 
     "max-params": ["error", 5],
-    "max-lines": [
-      "error",
-      { "max": 500, "skipComments": true, "skipBlankLines": true }
-    ],
+    "max-lines": ["error", { "max": 500, "skipComments": true, "skipBlankLines": true }],
     "max-lines-per-function": [
       "error",
       { "max": 60, "skipComments": true, "skipBlankLines": true }
@@ -122,10 +116,7 @@
 
     "unicorn/prevent-abbreviations": "off",
     "unicorn/no-null": "off",
-    "unicorn/filename-case": [
-      "error",
-      { "cases": { "kebabCase": true, "camelCase": true } }
-    ],
+    "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "camelCase": true } }],
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/prefer-module": "off",
@@ -137,14 +128,7 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
         "newlines-between": "always",
         "alphabetize": { "order": "asc" }
       }
