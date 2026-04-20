@@ -27,7 +27,7 @@
   <rule ref="category/java/codestyle.xml">
     <!-- 允许短变量名（i/j/k 等循环变量） -->
     <exclude name="ShortVariable"/>
-    <!-- 允许长方法名（业务代码描述性命名） -->
+    <!-- 允许长变量名（业务代码描述性命名） -->
     <exclude name="LongVariable"/>
   </rule>
 
