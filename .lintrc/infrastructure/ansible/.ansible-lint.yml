@@ -1,7 +1,7 @@
 ---
 # ansible-lint — Ansible Playbook / Role / Collection lint 配置
 # 文档：https://ansible.readthedocs.io/projects/lint/
-# 用法：ansible-lint --config-file .ansible-lint.yml
+# 用法：ansible-lint --config-file .lintrc/infrastructure/ansible/.ansible-lint.yml
 
 # ============================================================
 # 配置文件格式版本

@@ -1,5 +1,5 @@
 -- Lua 代码检查配置 — luacheck
--- 用法：luacheck --config .luacheckrc <files>
+-- 用法：luacheck --config .lintrc/backend/lua/.luacheckrc <files>
 
 -- ============================================================
 -- 全局配置

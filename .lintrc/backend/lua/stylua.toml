@@ -1,5 +1,5 @@
 # StyLua — Lua 代码格式化配置
-# 用法：stylua --check --config-path stylua.toml <files>
+# 用法：stylua --check --config-path .lintrc/backend/lua/stylua.toml <files>
 
 # 行宽
 column_width = 120

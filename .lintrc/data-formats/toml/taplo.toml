@@ -1,5 +1,5 @@
 # Taplo — TOML 代码格式化配置
-# 用法：taplo fmt --check <files>
+# 用法：taplo fmt --check --config .lintrc/data-formats/toml/taplo.toml <files>
 # 文档：https://taplo.tamasfe.dev/configuration/
 
 [formatting]

@@ -1,6 +1,6 @@
 # Ruff 配置 — 现代 Python 统一 Linter + Formatter
 # 文档：https://docs.astral.sh/ruff/configuration/
-# 用法：ruff check . && ruff format --check .
+# 用法：ruff check --config .lintrc/backend/python/ruff.toml . && ruff format --check --config .lintrc/backend/python/ruff.toml .
 
 # ============================================================
 # 基础设置

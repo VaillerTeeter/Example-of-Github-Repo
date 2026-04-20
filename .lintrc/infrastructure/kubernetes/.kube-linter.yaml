@@ -1,7 +1,7 @@
 ---
 # KubeLinter — Kubernetes Manifests 最佳实践检查配置
 # 文档：https://docs.kubelinter.io/
-# 用法：kube-linter lint --config .kube-linter.yaml <path>
+# 用法：kube-linter lint --config .lintrc/infrastructure/kubernetes/.kube-linter.yaml <path>
 
 # ============================================================
 # 检查范围
