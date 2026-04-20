@@ -15,5 +15,5 @@ WarnFilter {
     38
 }
 
-## Set maximum line length
+## Set tab width
 TabSize = 4
