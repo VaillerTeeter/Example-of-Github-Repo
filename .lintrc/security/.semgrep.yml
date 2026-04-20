@@ -14,8 +14,16 @@ rules:
   # ============================================================
   - id: no-hardcoded-admin-bypass
     pattern-either:
-      - pattern: if $USER == "admin"
-      - pattern: if $ROLE == "admin"
+      - pattern: |
+          if $USER == "admin"
+            ...
+          end
+      - pattern: |
+          if $ROLE == "admin"
+            ...
+          end
+      - pattern: $EXPR if $USER == "admin"
+      - pattern: $EXPR if $ROLE == "admin"
     message: "Hardcoded role check detected. Use RBAC/ABAC via authorization middleware."
     languages: [ruby]
     severity: ERROR
