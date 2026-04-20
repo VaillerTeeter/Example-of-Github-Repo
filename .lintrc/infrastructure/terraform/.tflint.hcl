@@ -88,7 +88,7 @@ rule "terraform_naming_convention" {
   }
 }
 
-# 模块中禁止空变量（没有 description 且没有 default）
+# 所有使用的 provider 必须在 required_providers 块中声明
 rule "terraform_required_providers" {
   enabled = true
 }
@@ -98,7 +98,7 @@ rule "terraform_required_version" {
   enabled = true
 }
 
-# 禁止直接在 provider 块中硬编码 credential
+# 禁止未使用的变量、local、data source 和模块声明
 rule "terraform_unused_declarations" {
   enabled = true
 }
