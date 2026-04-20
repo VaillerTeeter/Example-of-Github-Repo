@@ -5,4 +5,4 @@
 #
 # Examples (uncomment and customize as needed):
 # CVE-2021-44228  2024-12-31  log4shell - not affected (no log4j in project)
-# GHSA-jfh8-c2jp-jgg  no-fix  upstream dependency, no fix available yet
+# GHSA-jfh8-c2jp-jggg  no-fix  upstream dependency, no fix available yet

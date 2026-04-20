@@ -16,7 +16,7 @@
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/bestpractices.xml">
     <!-- 允许使用具体集合实现类（ArrayList、HashMap 等）而非接口类型；
-         LooseCoupling 即“嫾弹耦合”: 建议用 List/Map 等接口声明变量。
+         LooseCoupling 即"松散耦合": 建议用 List/Map 等接口声明变量。
          如需强制接口类型，请移除此排除项 -->
     <exclude name="LooseCoupling"/>
   </rule>

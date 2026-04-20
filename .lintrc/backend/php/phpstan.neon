@@ -32,11 +32,11 @@ parameters:
   checkImplicitMixed: true
   # 更严格的 dead code 检测
   reportUnmatchedIgnoredErrors: true
-  # 海豁边界（全面类型檢查）
+  # 检查声明的返回类型是否比实际返回值更宽
   checkTooWideReturnTypes: true
   # PHPDoc 必须与实际类型匹配
   reportMaybes: true
-  # 返回类型过宽报开
+  # 报告条件语句最后一个条件始终为 true 的情况
   reportAlwaysTrueInLastCondition: true
   # 静态属性必须初始化
   checkUninitializedProperties: true
