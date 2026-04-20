@@ -82,6 +82,7 @@ download-external-modules: true
 skip-path:
   - node_modules
   - .git
+  - .lintrc
   - vendor
   - .terraform
   - dist

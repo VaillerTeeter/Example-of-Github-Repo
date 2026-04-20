@@ -1,6 +1,6 @@
 <!-- markdownlint-disable-file MD041 -->
-<!-- 请根据你的 PR 类型删除不相关的部分 -->
-<!-- Please remove sections that are not relevant to your PR type -->
+<!-- 请填写所有模板部分；如某项不适用，请保留该部分并填写 N/A -->
+<!-- Please complete all sections of this template; if a section does not apply, keep it and write N/A -->
 
 ## 变更类型 / Change Type
 
