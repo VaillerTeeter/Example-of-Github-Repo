@@ -221,7 +221,38 @@
     "delegatecall",
     "jsonlint",
     "prantlf",
-    "kubeval"
+    "kubeval",
+    "Dockerfiles",
+    "KUBELINTER",
+    "Rscript",
+    "erlef",
+    "Fourmolu",
+    "fourmolu",
+    "cpanm",
+    "perlcritic",
+    "mlugg",
+    "nimcache",
+    "jiro",
+    "Ttools",
+    "weavejester",
+    "cachix",
+    "nixos",
+    "ISCL",
+    "texlive",
+    "mrtazz",
+    "cmakelint",
+    "tekton",
+    "Tekton",
+    "TEKTON",
+    "Rego",
+    "rego",
+    "gixy",
+    "minphony",
+    "phonydeclared",
+    "timestampexpanded",
+    "Starlark",
+    "apachectl",
+    "robotidy"
   ],
 
   "flagWords": [
@@ -349,7 +380,7 @@
       "words": []
     },
     {
-      "filename": "README.md",
+      "filename": "**/README.md",
       "flagWords": []
     },
     {

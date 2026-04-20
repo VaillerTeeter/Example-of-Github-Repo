@@ -153,7 +153,7 @@
         "noShoutyConstants": "error",
         "noUnusedTemplateLiteral": "error",
         "noVar": "error",
-        "useAsConstEnum": "error",
+        "useAsConstAssertion": "error",
         "useBlockStatements": "error",
         "useCollapsedElseIf": "error",
         "useConsistentArrayType": {
@@ -171,11 +171,7 @@
           "level": "error",
           "options": {
             "requireAscii": true,
-            "filenameCase": {
-              "kebab-case": true,
-              "camelCase": true,
-              "PascalCase": true
-            }
+            "filenameCases": ["kebab-case", "camelCase", "PascalCase"]
           }
         },
         "useForOf": "error",

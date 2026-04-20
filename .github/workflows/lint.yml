@@ -427,9 +427,13 @@ jobs:
       - name: Prettier (format check)
         if: steps.check-js.outputs.found == 'true'
         run: |
-          npx prettier --config .lintrc/frontend/prettier/.prettierrc \
-            --check "**/*.js" "**/*.jsx" "**/*.mjs" "**/*.cjs" \
-            --ignore-path .gitignore
+          mapfile -t JS_FMT_FILES < <(find . \
+            \( -name "*.js" -o -name "*.jsx" -o -name "*.mjs" -o -name "*.cjs" \) \
+            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./node_modules/*" 2>/dev/null)
+          if [ ${#JS_FMT_FILES[@]} -gt 0 ]; then
+            npx prettier --config .lintrc/frontend/prettier/.prettierrc \
+              --check "${JS_FMT_FILES[@]}"
+          fi
 
       - name: ESLint (static analysis)
         if: steps.check-js.outputs.found == 'true'
@@ -1929,7 +1933,7 @@ jobs:
         run: |
           actionlint \
             -config-file .lintrc/general/actionlint.yaml \
-            -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A{{replace $err.Snippet "\\n" "%0A"}}%0A{{end}}' \
+            -format $'{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A{{replace $err.Snippet "\\n" "%0A"}}%0A{{end}}' \
             .github/workflows/*.yml
 
   r-lint:
@@ -2407,7 +2411,7 @@ jobs:
       - name: Install ocamlformat
         if: steps.check.outputs.count != '0'
         run: |
-          eval $(opam env)
+          eval "$(opam env)"
           opam install -y ocamlformat
 
       - name: Set up ocamlformat config
@@ -2417,7 +2421,7 @@ jobs:
       - name: Check OCaml formatting
         if: steps.check.outputs.count != '0'
         run: |
-          eval $(opam env)
+          eval "$(opam env)"
           find . \( -name "*.ml" -o -name "*.mli" \) \
             | grep -v "_build\|vendor\|\.opam" \
             | xargs ocamlformat --check
@@ -2575,8 +2579,7 @@ jobs:
         id: check
         run: |
           COUNT=$(find . -name ".env*" \
-            | grep -v "\.git\|node_modules\|vendor\|\.env\.example\|\.env\.sample" \
-            | wc -l)
+            | { grep -vc "\.git\|node_modules\|vendor\|\.env\.example\|\.env\.sample" || true; })
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
 
       - name: Install dotenv-linter
@@ -2978,6 +2981,7 @@ jobs:
         run: |
           pip install --upgrade setuptools
           pip install semgrep==1.102.0
+          pip install --upgrade setuptools
 
       - name: Run Semgrep SAST
         run: |
@@ -3767,8 +3771,10 @@ jobs:
         run: |
           find . -name "*.dhall" | grep -v "vendor\|node_modules" \
             | while read -r f; do
-                dhall lint < "$f" > /tmp/dhall_out && diff -q "$f" /tmp/dhall_out > /dev/null \
-                  || { echo "ERROR: $f needs dhall lint"; exit 1; }
+                dhall lint < "$f" > /tmp/dhall_out
+                if ! diff -q "$f" /tmp/dhall_out > /dev/null; then
+                  echo "ERROR: $f needs dhall lint"; exit 1
+                fi
               done
 
       - name: dhall format check
@@ -4216,6 +4222,7 @@ jobs:
             --no-progress \
             --no-summary \
             --gitignore \
+            --exclude ".lintrc/**" \
             "**"
 
   yamllint-strict:
