@@ -2935,7 +2935,7 @@ jobs:
 
       - name: Set up kubectl
         if: steps.check.outputs.count != '0'
-        uses: azure/setup-kubectl@v4
+        uses: azure/setup-kubectl@v5
 
       - name: Validate Kustomize overlays
         if: steps.check.outputs.count != '0'
