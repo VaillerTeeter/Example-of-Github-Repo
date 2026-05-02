@@ -63,7 +63,6 @@
 | --- | --- |
 | `mcp_github_search_repositories` | 搜索 GitHub 上的仓库 |
 | `mcp_github_search_code` | 在 GitHub 上搜索代码片段 |
-| `mcp_github_search_issues` | 搜索 Issues / PR（同上，复用） |
 | `mcp_github_search_users` | 搜索 GitHub 用户 |
 
 ---
