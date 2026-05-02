@@ -239,8 +239,8 @@ def inspect_tokens(tokens):
         if subcmd == 'tag':
             # 扫描所有参数：含写标志则拦截；无任何 - 标志但有位置参数则为隐式创建，也拦截
             tag_write_flags = {'-a', '--annotate', '-d', '--delete', '-f', '--force',
-                               '-s', '--sign', '-m', '--message', '-u', '--local-user',
-                               '-F', '--file'}
+                                '-s', '--sign', '-m', '--message', '-u', '--local-user',
+                                '-F', '--file'}
             tag_args_lower = [a.lower() for a in rest[1:]]
             if any(a in tag_write_flags for a in tag_args_lower):
                 print('git tag 写操作（创建/删除标签）')

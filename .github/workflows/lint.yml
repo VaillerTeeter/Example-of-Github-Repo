@@ -128,7 +128,7 @@ jobs:
         run: |
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             clang-format --style=file:.lintrc/backend/c-cpp/.clang-format --dry-run --Werror "${CPP_FILES[@]}"
@@ -155,7 +155,7 @@ jobs:
         run: |
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             cppcheck \
@@ -178,7 +178,7 @@ jobs:
           pip install --quiet flawfinder==2.0.19
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             flawfinder --minlevel=1 --error-level=4 "${CPP_FILES[@]}"
@@ -191,7 +191,7 @@ jobs:
           pip install --quiet cpplint==2.0.0
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             cpplint \
@@ -1310,7 +1310,7 @@ jobs:
         id: check-json
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           if [ ${#JSON_FILES[@]} -gt 0 ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -1334,7 +1334,7 @@ jobs:
         if: steps.check-json.outputs.found == 'true'
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           FAILED=0
           for f in "${JSON_FILES[@]}"; do
@@ -1363,7 +1363,7 @@ jobs:
         run: |
           mapfile -t XML_FILES < <(find . \
             \( -name "*.xml" -o -name "*.xsd" -o -name "*.xsl" -o -name "*.xslt" \
-               -o -name "*.pom" -o -name "*.wsdl" \) \
+              -o -name "*.pom" -o -name "*.wsdl" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#XML_FILES[@]} -gt 0 ]; then
@@ -1383,7 +1383,7 @@ jobs:
         run: |
           mapfile -t XML_FILES < <(find . \
             \( -name "*.xml" -o -name "*.xsd" -o -name "*.xsl" -o -name "*.xslt" \
-               -o -name "*.pom" -o -name "*.wsdl" \) \
+              -o -name "*.pom" -o -name "*.wsdl" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           FAILED=0
@@ -1629,8 +1629,8 @@ jobs:
         run: |
           mapfile -t OAS_FILES < <(find . \
             \( -name "openapi*.yaml" -o -name "openapi*.yml" -o -name "openapi*.json" \
-               -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
-               -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
+              -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
+              -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#OAS_FILES[@]} -gt 0 ]; then
@@ -1656,8 +1656,8 @@ jobs:
         run: |
           mapfile -t OAS_FILES < <(find . \
             \( -name "openapi*.yaml" -o -name "openapi*.yml" -o -name "openapi*.json" \
-               -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
-               -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
+              -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
+              -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           for f in "${OAS_FILES[@]}"; do
@@ -1783,8 +1783,8 @@ jobs:
           mapfile -t ANS_FILES < <(find . \
             \( -name "*.yml" -o -name "*.yaml" \) \
             \( -path "*/playbooks/*" -o -path "*/roles/*" \
-               -o -path "*/tasks/*" -o -name "site.yml" \
-               -o -name "playbook.yml" \) \
+              -o -path "*/tasks/*" -o -name "site.yml" \
+              -o -name "playbook.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#ANS_FILES[@]} -gt 0 ]; then
@@ -1830,9 +1830,9 @@ jobs:
           mapfile -t K8S_FILES < <(find . \
             \( -name "*.yaml" -o -name "*.yml" \) \
             \( -path "*/k8s/*" -o -path "*/kubernetes/*" \
-               -o -path "*/manifests/*" -o -path "*/deploy/*" \
-               -o -path "*/chart/*" -o -path "*/charts/*" \
-               -o -path "*/helm/*" \) \
+              -o -path "*/manifests/*" -o -path "*/deploy/*" \
+              -o -path "*/chart/*" -o -path "*/charts/*" \
+              -o -path "*/helm/*" \) \
             ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           if [ ${#K8S_FILES[@]} -gt 0 ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -1857,9 +1857,9 @@ jobs:
           mapfile -t K8S_FILES < <(find . \
             \( -name "*.yaml" -o -name "*.yml" \) \
             \( -path "*/k8s/*" -o -path "*/kubernetes/*" \
-               -o -path "*/manifests/*" -o -path "*/deploy/*" \
-               -o -path "*/chart/*" -o -path "*/charts/*" \
-               -o -path "*/helm/*" \) \
+              -o -path "*/manifests/*" -o -path "*/deploy/*" \
+              -o -path "*/chart/*" -o -path "*/charts/*" \
+              -o -path "*/helm/*" \) \
             ! -path "./.github/*" ! -path "./vendor/*" \
             ! -path "./.lintrc/*" 2>/dev/null)
           kubeconform \
@@ -1884,8 +1884,8 @@ jobs:
         run: |
           mapfile -t K8S_DIRS < <(find . \
             \( -path "*/k8s" -o -path "*/kubernetes" \
-               -o -path "*/manifests" -o -path "*/deploy" \
-               -o -path "*/charts" -o -path "*/helm" \) \
+              -o -path "*/manifests" -o -path "*/deploy" \
+              -o -path "*/charts" -o -path "*/helm" \) \
             -type d ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           if [ ${#K8S_DIRS[@]} -gt 0 ]; then
             kube-linter lint \
@@ -4117,7 +4117,7 @@ jobs:
       - name: Lint commits
         run: |
           npx commitlint \
-            --config .lintrc/git/.commitlintrc.js \
+            --config .lintrc/git/.commitlintrc.cjs \
             --from ${{ github.event.pull_request.base.sha }} \
             --to ${{ github.event.pull_request.head.sha }} \
             --verbose
