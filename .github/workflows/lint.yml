@@ -4274,3 +4274,119 @@ jobs:
         run: |
           ls-lint \
             --config .lintrc/general/.ls-lint.yml
+
+  # ============================================================
+  # Summary gate — used as the single required status check
+  # ============================================================
+  all-checks:
+    name: All Lint Checks Passed
+    if: always()
+    needs:
+      - markdown-lint
+      - yaml-lint
+      - c-lint
+      - cpp-lint
+      - python-lint
+      - java-lint
+      - js-lint
+      - typescript-lint
+      - vue-lint
+      - rust-lint
+      - css-lint
+      - powershell-lint
+      - html-lint
+      - bash-lint
+      - go-lint
+      - kotlin-lint
+      - csharp-lint
+      - php-lint
+      - ruby-lint
+      - swift-lint
+      - dart-lint
+      - scala-lint
+      - lua-lint
+      - json-lint
+      - xml-lint
+      - toml-lint
+      - sql-lint
+      - protobuf-lint
+      - graphql-lint
+      - openapi-lint
+      - dockerfile-lint
+      - terraform-lint
+      - ansible-lint
+      - github-actions-lint
+      - r-lint
+      - groovy-lint
+      - elixir-lint
+      - haskell-lint
+      - erlang-lint
+      - perl-lint
+      - julia-lint
+      - zig-lint
+      - nim-lint
+      - crystal-lint
+      - fsharp-lint
+      - clojure-lint
+      - ocaml-lint
+      - scss-lint
+      - less-lint
+      - svelte-lint
+      - astro-lint
+      - dotenv-lint
+      - csv-lint
+      - nix-lint
+      - docker-compose-lint
+      - helm-lint
+      - cloudformation-lint
+      - bicep-lint
+      - gitlab-ci-lint
+      - jenkins-lint
+      - circleci-lint
+      - packer-lint
+      - kustomize-lint
+      - rst-lint
+      - asciidoc-lint
+      - latex-lint
+      - notebook-lint
+      - makefile-lint
+      - cmake-lint
+      - bazel-lint
+      - drone-ci-lint
+      - bitbucket-lint
+      - tekton-lint
+      - argo-lint
+      - opa-lint
+      - nginx-lint
+      - apache-lint
+      - gherkin-lint
+      - robot-lint
+      - editorconfig-lint
+      - cue-lint
+      - dhall-lint
+      - kcl-lint
+      - asyncapi-lint
+      - renovate-lint
+      - plantuml-lint
+      - solidity-lint
+      - ruff-lint
+      - biome-lint
+      - vale-lint
+      - commitlint-lint
+      - checkov-lint
+      - knip-lint
+      - cspell-lint
+      - yamllint-strict
+      - ls-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all jobs passed
+        env:
+          RESULTS: ${{ toJSON(needs.*.result) }}
+        run: |
+          echo "Job results: $RESULTS"
+          if echo "$RESULTS" | grep -qE '"failure"|"cancelled"'; then
+            echo "One or more jobs failed or were cancelled."
+            exit 1
+          fi
+          echo "All jobs passed (or were skipped)."
