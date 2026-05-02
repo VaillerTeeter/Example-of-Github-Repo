@@ -1347,7 +1347,7 @@ jobs:
         if: steps.check-json.outputs.found == 'true'
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           prettier --config .lintrc/frontend/prettier/.prettierrc --check "${JSON_FILES[@]}"
 
