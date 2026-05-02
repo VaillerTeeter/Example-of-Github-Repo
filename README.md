@@ -34,7 +34,7 @@
 │   ├── instructions/
 │   │   └── git-workflow.instructions.md  # AI Git 工作流规范（Copilot 指令文件）
 │   ├── workflows/
-│   │   └── lint.yml                  # 多语言 lint CI（103 个 job，覆盖所有 语言/格式/安全/文档/构建工具）
+│   │   └── lint.yml                  # 多语言 lint CI（103 个 job，覆盖所有语言/格式/安全/文档/构建工具）
 │   ├── dependabot.yml                # 自动更新 Actions 依赖（每周一）
 │   └── PULL_REQUEST_TEMPLATE.md      # PR 模板（中英双语）
 ├── .lintrc/                          # 所有 lint 配置文件（按功能分类）
