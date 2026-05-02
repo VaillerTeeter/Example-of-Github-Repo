@@ -16,6 +16,10 @@
 │   ├── docs/
 │   │   ├── ci/
 │   │   │   └── ci-checks.md                 # CI 检查说明（详细规则文档）
+│   │   ├── hooks/
+│   │   │   └── git-guard.md                 # git-guard Hook 说明文档
+│   │   ├── mcp/
+│   │   │   └── github-tools.md              # GitHub MCP 工具清单
 │   │   └── settings/
 │   │       ├── settings-general.md
 │   │       ├── settings-branches.md
@@ -23,11 +27,16 @@
 │   │       ├── settings-actions.md
 │   │       ├── settings-advanced-security.md
 │   │       └── ...（共 19 个 GitHub 仓库配置说明文档）
+│   ├── hooks/
+│   │   ├── git-guard.json            # PreToolUse Hook 注册配置
+│   │   └── scripts/
+│   │       └── git-guard.sh          # git/gh 写操作拦截脚本
+│   ├── instructions/
+│   │   └── git-workflow.instructions.md  # AI Git 工作流规范（Copilot 指令文件）
 │   ├── workflows/
 │   │   └── lint.yml                  # 多语言 lint CI（102 个 job，覆盖所有语言/格式/安全/文档/构建工具）
-│   ├── dependabot.yml                # 自动更新 Actions 依赖（每周一）
-│   ├── PULL_REQUEST_TEMPLATE.md      # PR 模板（中英双语）
-│   └── copilot-instructions.md       # Copilot 工作区指令
+│   ├── dependabot.yml                # 自动更新 npm + Actions 依赖（每周一）
+│   └── PULL_REQUEST_TEMPLATE.md      # PR 模板（中英双语）
 ├── .lintrc/                          # 所有 lint 配置文件（按功能分类）
 │   ├── backend/                      # 后端语言
 │   │   ├── c-cpp/
@@ -136,9 +145,10 @@
 │   │       └── tsconfig-lint.json    # TypeScript 类型检查（tsc --noEmit）
 │   ├── general/                      # 通用工具
 │   │   ├── cspell.json               # 拼写检查（CSpell）
-│   │   └── .ls-lint.yml              # 文件命名规范（ls-lint）
+│   │   ├── .ls-lint.yml              # 文件命名规范（ls-lint）
+│   │   └── .yamllint.yml             # YAML 格式规范（yamllint，通用宽松配置）
 │   ├── git/                          # Git 提交规范
-│   │   └── .commitlintrc.json        # Commit Message 规范（commitlint）
+│   │   └── .commitlintrc.cjs         # Commit Message 规范（commitlint）
 │   ├── infrastructure/               # 基础设施
 │   │   ├── checkov.yaml              # IaC 安全扫描（Checkov）
 │   │   ├── ansible/
@@ -179,8 +189,8 @@
 
 1. 复制 Token 模板文件：
 
-   ```powershell
-   Copy-Item .env.example .env
+   ```bash
+   cp .env.example .env
    ```
 
 2. 编辑 `.env`，填入你的 GitHub Personal Access Token：
@@ -193,13 +203,13 @@
 
 3. 加载环境变量（每次新开终端执行一次）：
 
-   ```powershell
-   $content = Get-Content .env; foreach ($line in $content) { if ($line -match "^GH_TOKEN=(.+)$") { $env:GH_TOKEN = $Matches[1] } }
+   ```bash
+   export GH_TOKEN="$(grep '^GH_TOKEN=' .env | cut -d= -f2-)"
    ```
 
 4. 验证配置：
 
-   ```powershell
+   ```bash
    gh auth status
    ```
 

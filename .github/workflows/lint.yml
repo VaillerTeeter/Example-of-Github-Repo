@@ -831,7 +831,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.23"
-          cache: false  # golangci-lint-action 自行管理缓存，避免冲突
+          cache: false # golangci-lint-action 自行管理缓存，避免冲突
 
       - name: golangci-lint
         if: steps.check-go.outputs.found == 'true'
@@ -1952,7 +1952,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: 'release'
+          r-version: "release"
 
       - name: Install lintr and styler
         if: steps.check.outputs.count != '0'
@@ -1993,7 +1993,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install npm-groovy-lint
         if: steps.check.outputs.count != '0'
@@ -2026,8 +2026,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: erlef/setup-beam@v1
         with:
-          otp-version: '26.x'
-          elixir-version: '1.16.x'
+          otp-version: "26.x"
+          elixir-version: "1.16.x"
 
       - name: Cache deps
         if: steps.check.outputs.count != '0'
@@ -2065,7 +2065,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: haskell-actions/hlint-setup@v2
         with:
-          version: '3.8'
+          version: "3.8"
 
       - name: Set up HLint config
         if: steps.check.outputs.count != '0'
@@ -2082,7 +2082,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: haskell-actions/setup@v2
         with:
-          ghc-version: '9.6'
+          ghc-version: "9.6"
 
       - name: Install Fourmolu
         if: steps.check.outputs.count != '0'
@@ -2111,7 +2111,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: erlef/setup-beam@v1
         with:
-          otp-version: '26.x'
+          otp-version: "26.x"
 
       - name: Download Elvis
         if: steps.check.outputs.count != '0'
@@ -2180,7 +2180,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: julia-actions/setup-julia@v2
         with:
-          version: '1'
+          version: "1"
 
       - name: Install JuliaFormatter
         if: steps.check.outputs.count != '0'
@@ -2217,7 +2217,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: mlugg/setup-zig@v1
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Check zig fmt
         if: steps.check.outputs.count != '0'
@@ -2246,7 +2246,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: jiro4989/setup-nim-action@v2
         with:
-          nim-version: 'stable'
+          nim-version: "stable"
 
       - name: Check nimpretty formatting
         if: steps.check.outputs.count != '0'
@@ -2283,7 +2283,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: 'latest'
+          crystal: "latest"
 
       - name: Install Ameba
         if: steps.check.outputs.count != '0'
@@ -2322,7 +2322,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.x'
+          dotnet-version: "9.x"
 
       - name: Install Fantomas
         if: steps.check.outputs.count != '0'
@@ -2373,8 +2373,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Install Clojure + cljfmt
         if: steps.check.outputs.count != '0'
@@ -2405,7 +2405,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ocaml/setup-ocaml@v3
         with:
-          ocaml-compiler: '5.1'
+          ocaml-compiler: "5.1"
 
       - name: Install ocamlformat
         if: steps.check.outputs.count != '0'
@@ -2442,7 +2442,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install stylelint
         if: steps.check.outputs.count != '0'
@@ -2479,7 +2479,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install stylelint
         if: steps.check.outputs.count != '0'
@@ -2511,7 +2511,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install ESLint + Svelte plugin
         if: steps.check.outputs.count != '0'
@@ -2548,7 +2548,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install ESLint + Astro plugin
         if: steps.check.outputs.count != '0'
@@ -2612,7 +2612,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: "3.3"
 
       - name: Install csvlint
         if: steps.check.outputs.count != '0'
@@ -2705,7 +2705,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: azure/setup-helm@v4
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Run helm lint
         if: steps.check.outputs.count != '0'
@@ -2748,7 +2748,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install cfn-lint
         if: steps.check.outputs.count != '0'
@@ -2805,7 +2805,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -2836,7 +2836,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install npm-groovy-lint
         if: steps.check.outputs.count != '0'
@@ -2901,7 +2901,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: hashicorp/setup-packer@v3.2.0
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Packer fmt check
         if: steps.check.outputs.count != '0'
@@ -2974,7 +2974,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install Semgrep
         run: |
@@ -3068,7 +3068,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Check Node.js licenses
         run: |
@@ -3084,7 +3084,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Check Python licenses
         run: |
@@ -3116,7 +3116,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install rstcheck and doc8
         if: steps.check.outputs.count != '0'
@@ -3151,7 +3151,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: "3.3"
 
       - name: Install Asciidoctor
         if: steps.check.outputs.count != '0'
@@ -3212,7 +3212,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install tools
         if: steps.check.outputs.count != '0'
@@ -3253,7 +3253,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-go@v5
         with:
-          go-version: 'stable'
+          go-version: "stable"
 
       - name: Install checkmake
         if: steps.check.outputs.count != '0'
@@ -3283,7 +3283,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install cmakelint and cmake-format
         if: steps.check.outputs.count != '0'
@@ -3371,7 +3371,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -3402,7 +3402,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -3434,7 +3434,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install tekton-lint
         if: steps.check.outputs.count != '0'
@@ -3629,7 +3629,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install gherkin-lint
         if: steps.check.outputs.count != '0'
@@ -3658,7 +3658,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install robocop and robotidy
         if: steps.check.outputs.count != '0'
@@ -3843,7 +3843,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install AsyncAPI CLI
         if: steps.check.outputs.count != '0'
@@ -3881,7 +3881,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install renovate
         if: steps.check.outputs.count != '0'
@@ -3917,8 +3917,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Install Graphviz and PlantUML
         if: steps.check.outputs.count != '0'
@@ -3955,7 +3955,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install solhint
         if: steps.check.outputs.count != '0'
@@ -3971,7 +3971,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install slither
         if: steps.check.outputs.count != '0'
@@ -4042,7 +4042,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install biome
         if: steps.check.outputs.count != '0'
@@ -4105,7 +4105,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install commitlint
         run: |
@@ -4141,7 +4141,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install checkov
         if: steps.check.outputs.count != '0'
@@ -4176,7 +4176,7 @@ jobs:
         if: steps.check.outputs.found == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install dependencies
         if: steps.check.outputs.found == 'true'
@@ -4209,7 +4209,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install cspell
         run: npm install -g cspell@8.17.1
@@ -4242,7 +4242,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'

@@ -5,11 +5,6 @@ module.exports = {
   parserPreset: 'conventional-changelog-conventionalcommits',
   formatter: '@commitlint/format',
 
-  // Ignore commits whose message starts with a UTF-8 BOM (\uFEFF).
-  // Such commits may have been created using Windows tools that write
-  // BOM-prefixed files, causing the header to fail header-trim validation.
-  ignores: [(commit) => /^\uFEFF/.test(commit)],
-
   rules: {
     'type-enum': [
       2,
@@ -40,7 +35,7 @@ module.exports = {
     'subject-empty': [2, 'never'],
     'subject-full-stop': [2, 'never', '.'],
     'subject-min-length': [2, 'always', 10],
-    'subject-max-length': [2, 'always', 72],
+    'subject-max-length': [2, 'always', 100],
 
     'header-max-length': [2, 'always', 100],
     'header-min-length': [2, 'always', 15],
