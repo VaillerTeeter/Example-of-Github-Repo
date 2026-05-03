@@ -6,7 +6,7 @@ applyTo: "**"
 # AI Git Workflow Rules
 
 <!-- 本文件约束 AI 在 git / gh / GitHub MCP 操作上的行为。
-    物理拦截由 .github/hooks/scripts/git-guard.sh 负责；本文件为 AI 行为规范。 -->
+     物理拦截由 .github/hooks/scripts/git-guard.sh 负责；本文件为 AI 行为规范。 -->
 
 <!-- ============================================================
   .instructions.md 写作规范
