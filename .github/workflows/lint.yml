@@ -4116,6 +4116,8 @@ jobs:
             exit 0
           fi
           for sha in "${shas[@]}"; do
+            subject=$(git log -1 --format=%s "$sha")
+            echo "--- Linting commit ${sha} : ${subject} ---"
             # Strip any leading UTF-8 BOM (EF BB BF) before linting so that
             # commits authored with Windows tooling do not fail header rules.
             msg=$(git log -1 --format=%B "$sha" | sed '1s/^\xEF\xBB\xBF//')
@@ -4123,6 +4125,7 @@ jobs:
                 | npx commitlint \
                     --config .lintrc/git/.commitlintrc.cjs \
                     --verbose; then
+              echo "commitlint FAILED for commit ${sha} : ${subject}"
               failed=1
             fi
           done
