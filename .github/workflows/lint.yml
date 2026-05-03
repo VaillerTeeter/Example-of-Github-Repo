@@ -4120,9 +4120,9 @@ jobs:
             # commits authored with Windows tooling do not fail header rules.
             msg=$(git log -1 --format=%B "$sha" | sed '1s/^\xEF\xBB\xBF//')
             if ! printf '%s\n' "$msg" \
-                 | npx commitlint \
-                     --config .lintrc/git/.commitlintrc.cjs \
-                     --verbose; then
+                | npx commitlint \
+                    --config .lintrc/git/.commitlintrc.cjs \
+                    --verbose; then
               failed=1
             fi
           done
