@@ -3,7 +3,7 @@
   xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
-                      https://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+                    https://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
   <description>
     自定义 PMD 规则集 — 覆盖 Best Practices / Code Style /
@@ -12,17 +12,17 @@
   </description>
 
   <!-- ══════════════════════════════════════════════════
-       Best Practices（最佳实践）
+      Best Practices（最佳实践）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/bestpractices.xml">
     <!-- 允许使用具体集合实现类（ArrayList、HashMap 等）而非接口类型；
-         LooseCoupling 即"松散耦合": 建议用 List/Map 等接口声明变量。
-         如需强制接口类型，请移除此排除项 -->
+      LooseCoupling 即"松散耦合": 建议用 List/Map 等接口声明变量。
+      如需强制接口类型，请移除此排除项 -->
     <exclude name="LooseCoupling"/>
   </rule>
 
   <!-- ══════════════════════════════════════════════════
-       Code Style（代码风格）
+      Code Style（代码风格）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/codestyle.xml">
     <!-- 允许短变量名（i/j/k 等循环变量） -->
@@ -32,7 +32,7 @@
   </rule>
 
   <!-- ══════════════════════════════════════════════════
-       Design（设计）
+      Design（设计）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/design.xml"/>
 
@@ -98,7 +98,7 @@
     </properties>
   </rule>
   <!-- ══════════════════════════════════════════════════
-       Error Prone（易错模式）
+      Error Prone（易错模式）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/errorprone.xml">
     <!-- 允许在条件中赋值（如 while ((line = reader.readLine()) != null)） -->
@@ -108,27 +108,27 @@
   </rule>
 
   <!-- ══════════════════════════════════════════════════
-       Performance（性能）
+      Performance（性能）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/performance.xml"/>
 
   <!-- ══════════════════════════════════════════════════
-       Security（安全）
+      Security（安全）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/security.xml"/>
 
   <!-- ══════════════════════════════════════════════════
-       Multithreading（多线程）
+      Multithreading（多线程）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/multithreading.xml"/>
 
   <!-- ══════════════════════════════════════════════════
-       Documentation（文档）
+      Documentation（文档）
   ══════════════════════════════════════════════════ -->
   <rule ref="category/java/documentation.xml">
     <properties>
       <property name="violationSuppressXPath"
-        value="//ClassOrInterfaceDeclaration[@Public='false']"/>
+      value="//ClassOrInterfaceDeclaration[@Public='false']"/>
     </properties>
   </rule>
 

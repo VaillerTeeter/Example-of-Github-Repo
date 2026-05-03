@@ -22,7 +22,7 @@
 | --- | --- | --- |
 | 基础规则 | `extends: default` | yamllint 默认规则集 |
 | 行长度 | 最长 200 字符 | 放宽默认的 80 字符限制 |
-| 布尔值写法 | 仅允许 `true` / `false` | 禁止 `yes` / `no` / `on` / `off` 等写法 |
+| 布尔值写法 | 仅允许 `true` / `false` / `on` | 禁止 `yes` / `no` / `off` 等写法；`on` 保留用于 GitHub Actions 触发器 |
 
 ## 触发时机
 
@@ -2409,7 +2409,7 @@ hadolint 是 Dockerfile lint 标准工具，内置 ShellCheck 对 `RUN` 步骤�
 | DL3009 | warn | 安装后删除 apt-get 缓存 |
 | DL4001 | error | 不在同一镜像中混用 wget 和 curl |
 
-**可信注册中心**：`docker.io`、`ghcr.io`、`mcr.microsoft.com`、`gcr.io`、`quay.io`、`public.ecr.aws`。  
+**可信注册中心**：`docker.io`、`ghcr.io`、`mcr.microsoft.com`、`gcr.io`、`quay.io`、`public.ecr.aws`。
 CI 配置 `failure-threshold: error`，仅 error 级别规则导致构建失败。
 
 ---

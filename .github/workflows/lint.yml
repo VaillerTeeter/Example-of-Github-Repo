@@ -42,16 +42,7 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: .
-          config_data: |
-            extends: default
-            rules:
-              line-length:
-                max: 200
-              colons:
-                max-spaces-after: 2
-              truthy:
-                allowed-values: ["true", "false"]
-                check-keys: false
+          config_file: .lintrc/general/.yamllint.yml
 
   c-lint:
     name: C Lint
@@ -128,7 +119,7 @@ jobs:
         run: |
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             clang-format --style=file:.lintrc/backend/c-cpp/.clang-format --dry-run --Werror "${CPP_FILES[@]}"
@@ -155,7 +146,7 @@ jobs:
         run: |
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             cppcheck \
@@ -178,7 +169,7 @@ jobs:
           pip install --quiet flawfinder==2.0.19
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             flawfinder --minlevel=1 --error-level=4 "${CPP_FILES[@]}"
@@ -191,7 +182,7 @@ jobs:
           pip install --quiet cpplint==2.0.0
           mapfile -t CPP_FILES < <(find . \
             \( -name "*.cpp" -o -name "*.cc" -o -name "*.cxx" \
-               -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
+              -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) \
             ! -path "./.github/*" 2>/dev/null)
           if [ ${#CPP_FILES[@]} -gt 0 ]; then
             cpplint \
@@ -831,7 +822,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.23"
-          cache: false  # golangci-lint-action 自行管理缓存，避免冲突
+          cache: false # golangci-lint-action 自行管理缓存，避免冲突
 
       - name: golangci-lint
         if: steps.check-go.outputs.found == 'true'
@@ -1310,7 +1301,7 @@ jobs:
         id: check-json
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           if [ ${#JSON_FILES[@]} -gt 0 ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -1334,7 +1325,7 @@ jobs:
         if: steps.check-json.outputs.found == 'true'
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           FAILED=0
           for f in "${JSON_FILES[@]}"; do
@@ -1347,7 +1338,7 @@ jobs:
         if: steps.check-json.outputs.found == 'true'
         run: |
           mapfile -t JSON_FILES < <(find . -name "*.json" \
-            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./node_modules/*" \
+            ! -path "./.github/*" ! -path "./.lintrc/*" ! -path "./.vscode/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" ! -path "./.git/*" 2>/dev/null)
           prettier --config .lintrc/frontend/prettier/.prettierrc --check "${JSON_FILES[@]}"
 
@@ -1363,7 +1354,7 @@ jobs:
         run: |
           mapfile -t XML_FILES < <(find . \
             \( -name "*.xml" -o -name "*.xsd" -o -name "*.xsl" -o -name "*.xslt" \
-               -o -name "*.pom" -o -name "*.wsdl" \) \
+              -o -name "*.pom" -o -name "*.wsdl" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#XML_FILES[@]} -gt 0 ]; then
@@ -1383,7 +1374,7 @@ jobs:
         run: |
           mapfile -t XML_FILES < <(find . \
             \( -name "*.xml" -o -name "*.xsd" -o -name "*.xsl" -o -name "*.xslt" \
-               -o -name "*.pom" -o -name "*.wsdl" \) \
+              -o -name "*.pom" -o -name "*.wsdl" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           FAILED=0
@@ -1629,8 +1620,8 @@ jobs:
         run: |
           mapfile -t OAS_FILES < <(find . \
             \( -name "openapi*.yaml" -o -name "openapi*.yml" -o -name "openapi*.json" \
-               -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
-               -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
+              -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
+              -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#OAS_FILES[@]} -gt 0 ]; then
@@ -1656,8 +1647,8 @@ jobs:
         run: |
           mapfile -t OAS_FILES < <(find . \
             \( -name "openapi*.yaml" -o -name "openapi*.yml" -o -name "openapi*.json" \
-               -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
-               -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
+              -o -name "swagger*.yaml" -o -name "swagger*.yml" -o -name "swagger*.json" \
+              -o -name "*-api-spec.yaml" -o -name "*-api-spec.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           for f in "${OAS_FILES[@]}"; do
@@ -1783,8 +1774,8 @@ jobs:
           mapfile -t ANS_FILES < <(find . \
             \( -name "*.yml" -o -name "*.yaml" \) \
             \( -path "*/playbooks/*" -o -path "*/roles/*" \
-               -o -path "*/tasks/*" -o -name "site.yml" \
-               -o -name "playbook.yml" \) \
+              -o -path "*/tasks/*" -o -name "site.yml" \
+              -o -name "playbook.yml" \) \
             ! -path "./.github/*" ! -path "./node_modules/*" \
             ! -path "./vendor/*" 2>/dev/null)
           if [ ${#ANS_FILES[@]} -gt 0 ]; then
@@ -1830,9 +1821,9 @@ jobs:
           mapfile -t K8S_FILES < <(find . \
             \( -name "*.yaml" -o -name "*.yml" \) \
             \( -path "*/k8s/*" -o -path "*/kubernetes/*" \
-               -o -path "*/manifests/*" -o -path "*/deploy/*" \
-               -o -path "*/chart/*" -o -path "*/charts/*" \
-               -o -path "*/helm/*" \) \
+              -o -path "*/manifests/*" -o -path "*/deploy/*" \
+              -o -path "*/chart/*" -o -path "*/charts/*" \
+              -o -path "*/helm/*" \) \
             ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           if [ ${#K8S_FILES[@]} -gt 0 ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -1857,9 +1848,9 @@ jobs:
           mapfile -t K8S_FILES < <(find . \
             \( -name "*.yaml" -o -name "*.yml" \) \
             \( -path "*/k8s/*" -o -path "*/kubernetes/*" \
-               -o -path "*/manifests/*" -o -path "*/deploy/*" \
-               -o -path "*/chart/*" -o -path "*/charts/*" \
-               -o -path "*/helm/*" \) \
+              -o -path "*/manifests/*" -o -path "*/deploy/*" \
+              -o -path "*/chart/*" -o -path "*/charts/*" \
+              -o -path "*/helm/*" \) \
             ! -path "./.github/*" ! -path "./vendor/*" \
             ! -path "./.lintrc/*" 2>/dev/null)
           kubeconform \
@@ -1884,8 +1875,8 @@ jobs:
         run: |
           mapfile -t K8S_DIRS < <(find . \
             \( -path "*/k8s" -o -path "*/kubernetes" \
-               -o -path "*/manifests" -o -path "*/deploy" \
-               -o -path "*/charts" -o -path "*/helm" \) \
+              -o -path "*/manifests" -o -path "*/deploy" \
+              -o -path "*/charts" -o -path "*/helm" \) \
             -type d ! -path "./.github/*" ! -path "./vendor/*" 2>/dev/null)
           if [ ${#K8S_DIRS[@]} -gt 0 ]; then
             kube-linter lint \
@@ -1952,7 +1943,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: 'release'
+          r-version: "release"
 
       - name: Install lintr and styler
         if: steps.check.outputs.count != '0'
@@ -1993,7 +1984,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install npm-groovy-lint
         if: steps.check.outputs.count != '0'
@@ -2026,8 +2017,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: erlef/setup-beam@v1
         with:
-          otp-version: '26.x'
-          elixir-version: '1.16.x'
+          otp-version: "26.x"
+          elixir-version: "1.16.x"
 
       - name: Cache deps
         if: steps.check.outputs.count != '0'
@@ -2065,7 +2056,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: haskell-actions/hlint-setup@v2
         with:
-          version: '3.8'
+          version: "3.8"
 
       - name: Set up HLint config
         if: steps.check.outputs.count != '0'
@@ -2082,7 +2073,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: haskell-actions/setup@v2
         with:
-          ghc-version: '9.6'
+          ghc-version: "9.6"
 
       - name: Install Fourmolu
         if: steps.check.outputs.count != '0'
@@ -2111,7 +2102,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: erlef/setup-beam@v1
         with:
-          otp-version: '26.x'
+          otp-version: "26.x"
 
       - name: Download Elvis
         if: steps.check.outputs.count != '0'
@@ -2180,7 +2171,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: julia-actions/setup-julia@v2
         with:
-          version: '1'
+          version: "1"
 
       - name: Install JuliaFormatter
         if: steps.check.outputs.count != '0'
@@ -2217,7 +2208,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: mlugg/setup-zig@v1
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Check zig fmt
         if: steps.check.outputs.count != '0'
@@ -2246,7 +2237,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: jiro4989/setup-nim-action@v2
         with:
-          nim-version: 'stable'
+          nim-version: "stable"
 
       - name: Check nimpretty formatting
         if: steps.check.outputs.count != '0'
@@ -2283,7 +2274,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: 'latest'
+          crystal: "latest"
 
       - name: Install Ameba
         if: steps.check.outputs.count != '0'
@@ -2322,7 +2313,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.x'
+          dotnet-version: "9.x"
 
       - name: Install Fantomas
         if: steps.check.outputs.count != '0'
@@ -2373,8 +2364,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Install Clojure + cljfmt
         if: steps.check.outputs.count != '0'
@@ -2405,7 +2396,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ocaml/setup-ocaml@v3
         with:
-          ocaml-compiler: '5.1'
+          ocaml-compiler: "5.1"
 
       - name: Install ocamlformat
         if: steps.check.outputs.count != '0'
@@ -2442,7 +2433,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install stylelint
         if: steps.check.outputs.count != '0'
@@ -2479,7 +2470,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install stylelint
         if: steps.check.outputs.count != '0'
@@ -2511,7 +2502,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install ESLint + Svelte plugin
         if: steps.check.outputs.count != '0'
@@ -2548,7 +2539,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install ESLint + Astro plugin
         if: steps.check.outputs.count != '0'
@@ -2612,7 +2603,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: "3.3"
 
       - name: Install csvlint
         if: steps.check.outputs.count != '0'
@@ -2705,7 +2696,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: azure/setup-helm@v4
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Run helm lint
         if: steps.check.outputs.count != '0'
@@ -2748,7 +2739,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install cfn-lint
         if: steps.check.outputs.count != '0'
@@ -2805,7 +2796,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -2836,7 +2827,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install npm-groovy-lint
         if: steps.check.outputs.count != '0'
@@ -2901,7 +2892,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: hashicorp/setup-packer@v3.2.0
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Packer fmt check
         if: steps.check.outputs.count != '0'
@@ -2974,7 +2965,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install Semgrep
         run: |
@@ -3068,7 +3059,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Check Node.js licenses
         run: |
@@ -3084,7 +3075,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Check Python licenses
         run: |
@@ -3116,7 +3107,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install rstcheck and doc8
         if: steps.check.outputs.count != '0'
@@ -3151,7 +3142,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: "3.3"
 
       - name: Install Asciidoctor
         if: steps.check.outputs.count != '0'
@@ -3212,7 +3203,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install tools
         if: steps.check.outputs.count != '0'
@@ -3253,7 +3244,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-go@v5
         with:
-          go-version: 'stable'
+          go-version: "stable"
 
       - name: Install checkmake
         if: steps.check.outputs.count != '0'
@@ -3283,7 +3274,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install cmakelint and cmake-format
         if: steps.check.outputs.count != '0'
@@ -3371,7 +3362,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -3402,7 +3393,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -3434,7 +3425,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install tekton-lint
         if: steps.check.outputs.count != '0'
@@ -3629,7 +3620,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install gherkin-lint
         if: steps.check.outputs.count != '0'
@@ -3658,7 +3649,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install robocop and robotidy
         if: steps.check.outputs.count != '0'
@@ -3843,7 +3834,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install AsyncAPI CLI
         if: steps.check.outputs.count != '0'
@@ -3881,7 +3872,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install renovate
         if: steps.check.outputs.count != '0'
@@ -3917,8 +3908,8 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Install Graphviz and PlantUML
         if: steps.check.outputs.count != '0'
@@ -3955,7 +3946,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install solhint
         if: steps.check.outputs.count != '0'
@@ -3971,7 +3962,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install slither
         if: steps.check.outputs.count != '0'
@@ -4042,7 +4033,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install biome
         if: steps.check.outputs.count != '0'
@@ -4105,7 +4096,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install commitlint
         run: |
@@ -4116,11 +4107,29 @@ jobs:
 
       - name: Lint commits
         run: |
-          npx commitlint \
-            --config .lintrc/git/.commitlintrc.js \
-            --from ${{ github.event.pull_request.base.sha }} \
-            --to ${{ github.event.pull_request.head.sha }} \
-            --verbose
+          from="${{ github.event.pull_request.base.sha }}"
+          to="${{ github.event.pull_request.head.sha }}"
+          failed=0
+          mapfile -t shas < <(git log --format="%H" "${from}..${to}")
+          if [[ ${#shas[@]} -eq 0 ]]; then
+            echo "No commits to lint."
+            exit 0
+          fi
+          for sha in "${shas[@]}"; do
+            subject=$(git log -1 --format=%s "$sha")
+            echo "--- Linting commit ${sha} : ${subject} ---"
+            # Strip any leading UTF-8 BOM (EF BB BF) before linting so that
+            # commits authored with Windows tooling do not fail header rules.
+            msg=$(git log -1 --format=%B "$sha" | sed '1s/^\xEF\xBB\xBF//')
+            if ! printf '%s\n' "$msg" \
+                | npx commitlint \
+                    --config .lintrc/git/.commitlintrc.cjs \
+                    --verbose; then
+              echo "commitlint FAILED for commit ${sha} : ${subject}"
+              failed=1
+            fi
+          done
+          exit $failed
 
   checkov-lint:
     name: Checkov (IaC Security)
@@ -4141,7 +4150,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install checkov
         if: steps.check.outputs.count != '0'
@@ -4176,7 +4185,7 @@ jobs:
         if: steps.check.outputs.found == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install dependencies
         if: steps.check.outputs.found == 'true'
@@ -4209,7 +4218,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
 
       - name: Install cspell
         run: npm install -g cspell@8.17.1
@@ -4242,7 +4251,7 @@ jobs:
         if: steps.check.outputs.count != '0'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install yamllint
         if: steps.check.outputs.count != '0'
@@ -4274,3 +4283,119 @@ jobs:
         run: |
           ls-lint \
             --config .lintrc/general/.ls-lint.yml
+
+  # ============================================================
+  # Summary gate — used as the single required status check
+  # ============================================================
+  all-checks:
+    name: All Lint Checks Passed
+    if: always()
+    needs:
+      - markdown-lint
+      - yaml-lint
+      - c-lint
+      - cpp-lint
+      - python-lint
+      - java-lint
+      - js-lint
+      - typescript-lint
+      - vue-lint
+      - rust-lint
+      - css-lint
+      - powershell-lint
+      - html-lint
+      - bash-lint
+      - go-lint
+      - kotlin-lint
+      - csharp-lint
+      - php-lint
+      - ruby-lint
+      - swift-lint
+      - dart-lint
+      - scala-lint
+      - lua-lint
+      - json-lint
+      - xml-lint
+      - toml-lint
+      - sql-lint
+      - protobuf-lint
+      - graphql-lint
+      - openapi-lint
+      - dockerfile-lint
+      - terraform-lint
+      - ansible-lint
+      - github-actions-lint
+      - r-lint
+      - groovy-lint
+      - elixir-lint
+      - haskell-lint
+      - erlang-lint
+      - perl-lint
+      - julia-lint
+      - zig-lint
+      - nim-lint
+      - crystal-lint
+      - fsharp-lint
+      - clojure-lint
+      - ocaml-lint
+      - scss-lint
+      - less-lint
+      - svelte-lint
+      - astro-lint
+      - dotenv-lint
+      - csv-lint
+      - nix-lint
+      - docker-compose-lint
+      - helm-lint
+      - cloudformation-lint
+      - bicep-lint
+      - gitlab-ci-lint
+      - jenkins-lint
+      - circleci-lint
+      - packer-lint
+      - kustomize-lint
+      - rst-lint
+      - asciidoc-lint
+      - latex-lint
+      - notebook-lint
+      - makefile-lint
+      - cmake-lint
+      - bazel-lint
+      - drone-ci-lint
+      - bitbucket-lint
+      - tekton-lint
+      - argo-lint
+      - opa-lint
+      - nginx-lint
+      - apache-lint
+      - gherkin-lint
+      - robot-lint
+      - editorconfig-lint
+      - cue-lint
+      - dhall-lint
+      - kcl-lint
+      - asyncapi-lint
+      - renovate-lint
+      - plantuml-lint
+      - solidity-lint
+      - ruff-lint
+      - biome-lint
+      - vale-lint
+      - commitlint-lint
+      - checkov-lint
+      - knip-lint
+      - cspell-lint
+      - yamllint-strict
+      - ls-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all jobs passed
+        env:
+          RESULTS: ${{ toJSON(needs.*.result) }}
+        run: |
+          echo "Job results: $RESULTS"
+          if echo "$RESULTS" | grep -qE '"failure"|"cancelled"'; then
+            echo "One or more jobs failed or were cancelled."
+            exit 1
+          fi
+          echo "All jobs passed (or were skipped)."

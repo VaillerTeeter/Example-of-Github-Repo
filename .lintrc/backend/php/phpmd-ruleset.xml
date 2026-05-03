@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         name="PHP Project Ruleset"
-         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
-           https://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+  name="PHP Project Ruleset"
+  xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+  xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
+    https://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
     <description>PHP Mess Detector 规则集 — 覆盖代码质量、设计、命名和未使用代码</description>
 
