@@ -4107,11 +4107,26 @@ jobs:
 
       - name: Lint commits
         run: |
-          npx commitlint \
-            --config .lintrc/git/.commitlintrc.cjs \
-            --from ${{ github.event.pull_request.base.sha }} \
-            --to ${{ github.event.pull_request.head.sha }} \
-            --verbose
+          from="${{ github.event.pull_request.base.sha }}"
+          to="${{ github.event.pull_request.head.sha }}"
+          failed=0
+          mapfile -t shas < <(git log --format="%H" "${from}..${to}")
+          if [[ ${#shas[@]} -eq 0 ]]; then
+            echo "No commits to lint."
+            exit 0
+          fi
+          for sha in "${shas[@]}"; do
+            # Strip any leading UTF-8 BOM (EF BB BF) before linting so that
+            # commits authored with Windows tooling do not fail header rules.
+            msg=$(git log -1 --format=%B "$sha" | sed '1s/^\xEF\xBB\xBF//')
+            if ! printf '%s\n' "$msg" \
+                 | npx commitlint \
+                     --config .lintrc/git/.commitlintrc.cjs \
+                     --verbose; then
+              failed=1
+            fi
+          done
+          exit $failed
 
   checkov-lint:
     name: Checkov (IaC Security)
