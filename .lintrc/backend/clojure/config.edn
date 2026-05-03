@@ -1,5 +1,5 @@
 {:linters
- {:unused-binding        {:level :error}
+  {:unused-binding        {:level :error}
   :missing-docstring     {:level :error
                           :exclude-regex "test"}
   :redundant-do          {:level :error}
@@ -18,6 +18,6 @@
                           :config {:patterns ["clojure.test"]}}
   :consistent-alias      {:level :error}}
 
- :output
- {:format   :text
+  :output
+  {:format   :text
   :progress false}}

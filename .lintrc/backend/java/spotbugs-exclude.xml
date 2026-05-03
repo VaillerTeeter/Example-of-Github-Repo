@@ -7,10 +7,10 @@
   xmlns="https://github.com/spotbugs/filter/3.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0
-                      https://raw.githubusercontent.com/spotbugs/spotbugs/master/spotbugs/etc/findbugsfilter.xsd">
+                    https://raw.githubusercontent.com/spotbugs/spotbugs/master/spotbugs/etc/findbugsfilter.xsd">
 
   <!-- ══════════════════════════════════════════════════
-       测试代码宽限
+      测试代码宽限
   ══════════════════════════════════════════════════ -->
 
   <!-- 测试类允许使用 assert（EI_EXPOSE_REP2 等测试常见模式） -->
@@ -26,7 +26,7 @@
   </Match>
 
   <!-- ══════════════════════════════════════════════════
-       框架 / 生成代码宽限
+      框架 / 生成代码宽限
   ══════════════════════════════════════════════════ -->
 
   <!-- Lombok 生成的 equals/hashCode 方法 -->
@@ -42,7 +42,7 @@
   </Match>
 
   <!-- ══════════════════════════════════════════════════
-       合理的误报排除
+      合理的误报排除
   ══════════════════════════════════════════════════ -->
 
   <!-- 返回内部可变数组（框架 API 常见，调用者不应修改） -->
@@ -52,7 +52,7 @@
   </Match> -->
 
   <!-- ══════════════════════════════════════════════════
-       不适用于项目的规则
+      不适用于项目的规则
   ══════════════════════════════════════════════════ -->
 
   <!-- 允许 null 返回（显式的 API 契约） -->
