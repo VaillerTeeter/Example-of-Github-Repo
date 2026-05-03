@@ -201,7 +201,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -1469,7 +1469,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check-sql.outputs.found == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -1788,7 +1788,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check-ansible.outputs.found == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -2737,7 +2737,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -2794,7 +2794,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -2963,7 +2963,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -3073,7 +3073,7 @@ jobs:
           fi
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3105,7 +3105,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3201,7 +3201,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3272,7 +3272,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3360,7 +3360,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3391,7 +3391,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3647,7 +3647,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3960,7 +3960,7 @@ jobs:
 
       - name: Set up Python (for slither)
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -3992,7 +3992,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -4148,7 +4148,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -4249,7 +4249,7 @@ jobs:
 
       - name: Set up Python
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
