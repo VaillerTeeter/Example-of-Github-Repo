@@ -224,7 +224,14 @@ def skip_gh_global_options(tokens):
     return tokens[idx:]
 
 def inspect_tokens(tokens):
-    tool = tokens[0].lower() if tokens else ''
+    if not tokens:
+        return
+    # Normalize: strip leading backslash, take basename, strip .exe suffix
+    # This prevents bypasses like /usr/bin/git, git.exe, or \git
+    tool_raw = tokens[0].lstrip('\\')
+    tool = os.path.basename(tool_raw).lower()
+    if tool.endswith('.exe'):
+        tool = tool[:-4]
     if not tool:
         return
     if tool == 'git':

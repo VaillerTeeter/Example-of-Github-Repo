@@ -42,16 +42,7 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: .
-          config_data: |
-            extends: default
-            rules:
-              line-length:
-                max: 200
-              colons:
-                max-spaces-after: 2
-              truthy:
-                allowed-values: ["true", "false"]
-                check-keys: false
+          config_file: .lintrc/general/.yamllint.yml
 
   c-lint:
     name: C Lint
