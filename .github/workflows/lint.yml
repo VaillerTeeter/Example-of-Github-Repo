@@ -12,7 +12,7 @@ on:
       - master
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -4165,6 +4165,35 @@ jobs:
             --output cli --output sarif \
             --output-file-path console,reports/checkov.sarif
 
+  react-doctor:
+    name: React Doctor (code quality scan)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      statuses: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check for React files
+        id: check-react
+        run: |
+          COUNT=$(find . -name "*.tsx" -o -name "*.jsx" \
+            | { grep -vc "node_modules\|dist\|build\|\.next\|\.nuxt" || true; })
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Run React Doctor
+        if: steps.check-react.outputs.count != '0'
+        uses: millionco/react-doctor@main
+        with:
+          directory: .
+          blocking: warning
+          comment: true
+          review-comments: true
+          project: ""
+
   knip-lint:
     name: Knip (Dead Code Detection)
     runs-on: ubuntu-latest
@@ -4383,6 +4412,7 @@ jobs:
       - vale-lint
       - commitlint-lint
       - checkov-lint
+      - react-doctor
       - knip-lint
       - cspell-lint
       - yamllint-strict
