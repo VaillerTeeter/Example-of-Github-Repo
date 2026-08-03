@@ -382,7 +382,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -442,7 +442,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -506,7 +506,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -626,7 +626,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -721,7 +721,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -1313,7 +1313,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check-json.outputs.found == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -1574,7 +1574,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check-graphql.outputs.found == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -1634,7 +1634,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check-openapi.outputs.found == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -1982,7 +1982,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -2431,7 +2431,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -2468,7 +2468,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -2500,7 +2500,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -2537,7 +2537,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -2825,7 +2825,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3057,7 +3057,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3423,7 +3423,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3618,7 +3618,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3832,7 +3832,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3870,7 +3870,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -3944,7 +3944,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -4031,7 +4031,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.count != '0'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -4094,7 +4094,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -4212,7 +4212,7 @@ jobs:
 
       - name: Set up Node.js
         if: steps.check.outputs.found == 'true'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
@@ -4245,7 +4245,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "lts/*"
 
